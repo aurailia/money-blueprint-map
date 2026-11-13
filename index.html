@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wealth &amp; Money Audit | Aurailia</title>
+<meta name="description" content="The form you fill out for your Wealth & Money Audit with Aurailia.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+    --plum-deep: #2a1028;
+    --plum: #3d1a3a;
+    --plum-soft: #52264e;
+    --card: rgba(255, 255, 255, 0.06);
+    --card-border: rgba(232, 196, 122, 0.25);
+    --gold: #e8c47a;
+    --gold-bright: #f3d89b;
+    --blush: #f4b6c8;
+    --lavender: #c49bff;
+    --teal: #8fd6cc;
+    --text: #fbeff3;
+    --muted: #d8bfd0;
+    --error: #ffb4b4;
+    --title-grad: linear-gradient(100deg, #c49bff 0%, #e3a6f0 45%, #f4b6c8 100%);
+    --serif: 'Cormorant Garamond', Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  [hidden] { display: none !important; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: var(--plum-deep);
+    background-image: linear-gradient(180deg, var(--plum-soft) 0%, var(--plum) 28%, var(--plum-deep) 100%);
+    background-repeat: no-repeat;
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  a { color: var(--gold-bright); }
+  button, input, textarea { font-family: inherit; }
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, .pick:focus-within { outline: 2px solid var(--gold-bright); outline-offset: 2px; }
+  .grad { background: var(--title-grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: var(--blush); width: fit-content; max-width: 100%; }
+
+  .preview-note { background: rgba(232, 196, 122, 0.14); color: var(--gold-bright); font-size: 13px; text-align: center; padding: 8px 16px; }
+  .wrap { width: 100%; max-width: 680px; margin: 0 auto; padding: 0 20px 72px; }
+  .brand { font-family: var(--serif); font-size: 26px; font-weight: 600; text-align: center; padding-top: 28px; margin: 0 auto; }
+  .brand-sub { text-align: center; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-top: 2px; }
+
+  .progress { margin: 26px 0 30px; }
+  .bars { display: grid; gap: 6px; }
+  .bars i { display: block; height: 5px; border-radius: 99px; background: rgba(255, 255, 255, 0.14); }
+  .bars i.on { background: linear-gradient(90deg, var(--gold), var(--blush)); }
+  .progress-label { display: flex; justify-content: space-between; gap: 12px; margin-top: 8px; font-size: 13px; color: var(--muted); }
+
+  .step-title { font-family: var(--serif); font-size: 46px; font-weight: 600; line-height: 1.08; padding-bottom: 3px; outline: none; }
+  .step-sub { margin-top: 10px; font-size: 16px; color: var(--muted); }
+  .form-body { margin-top: 28px; }
+
+  .field { margin-top: 24px; }
+  .field:first-child { margin-top: 0; }
+  .field.tight { margin-top: 10px; }
+  .field label, .field .label { display: block; font-size: 15px; font-weight: 600; }
+  .opt { font-weight: 400; color: var(--muted); font-size: 13px; }
+  .help { font-size: 13.5px; color: var(--muted); margin-top: 3px; }
+  input[type=text], input[type=email], input[type=url], input[type=date], input[type=time], select, textarea {
+    display: block; width: 100%; margin-top: 8px; padding: 13px 15px; min-height: 50px;
+    background: #fff9fb; color: #2a1028; border: 1px solid transparent; border-radius: 12px;
+    font-size: 16px; line-height: 1.5;
+  }
+  textarea { resize: vertical; min-height: 118px; }
+  textarea.tall { min-height: 200px; }
+  textarea.short { min-height: 84px; }
+  input::placeholder, textarea::placeholder { color: #8d7288; }
+  input[type=date], input[type=time] { -webkit-appearance: none; appearance: none; }
+  .invalid input, .invalid select, .invalid textarea { border-color: var(--error); box-shadow: 0 0 0 1px var(--error); }
+  .err { font-size: 13.5px; color: var(--error); margin-top: 6px; font-weight: 500; }
+  .count { font-size: 12px; color: var(--muted); text-align: right; margin-top: 4px; }
+
+  .pick { display: block; margin-top: 8px; border: 1px dashed rgba(232, 196, 122, 0.55); border-radius: 14px; background: var(--card); cursor: pointer; overflow: hidden; position: relative; }
+  .pick input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+  .pick-empty { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 24px 16px; text-align: center; }
+  .pick-empty b { color: var(--gold-bright); font-weight: 600; font-size: 15px; }
+  .pick-empty small { color: var(--muted); font-size: 13px; }
+  .pick-img { display: block; width: 100%; max-height: 260px; object-fit: cover; object-position: top; }
+  .pick-actions { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 6px; }
+  .link-btn { background: none; border: none; color: var(--gold-bright); font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; min-height: 44px; padding: 0; }
+
+  .group { background: var(--card); border: 1px solid var(--card-border); border-radius: 18px; padding: 24px 22px; margin-top: 18px; }
+  .group:first-child { margin-top: 0; }
+  .group-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
+  .group-head h2 { font-family: var(--serif); font-size: 27px; font-weight: 600; color: var(--gold-bright); line-height: 1.15; }
+  .add { width: 100%; margin-top: 16px; }
+  .shots { border-left: 2px solid var(--teal); padding-left: 16px; margin-top: 26px; }
+  .shots-title { font-family: var(--serif); font-size: 24px; font-weight: 600; color: var(--teal); line-height: 1.2; }
+
+  .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 12px 26px; border-radius: 999px; font-size: 15px; font-weight: 600; line-height: 1.25; text-decoration: none; cursor: pointer; border: 1px solid transparent; text-align: center; }
+  .btn:active { transform: scale(0.98); }
+  .btn[disabled] { opacity: 0.6; cursor: wait; }
+  .btn-primary { background: linear-gradient(135deg, var(--gold), var(--blush)); color: var(--plum-deep); }
+  .btn-ghost { background: transparent; color: var(--text); border-color: rgba(216, 191, 208, 0.4); }
+  .nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 34px; }
+  .nav .btn-primary { flex: 1 1 auto; max-width: 340px; margin-left: auto; }
+  .saved-note { text-align: center; font-size: 13px; color: var(--muted); margin-top: 16px; }
+  .form-error { background: rgba(255, 120, 120, 0.13); border: 1px solid rgba(255, 180, 180, 0.5); border-radius: 12px; padding: 12px 14px; font-size: 14.5px; margin-top: 20px; }
+
+  .ready { background: var(--card); border: 1px solid var(--card-border); border-radius: 16px; padding: 18px 20px; margin-bottom: 26px; font-size: 14.5px; }
+  .ready b { color: var(--gold-bright); }
+  .ready ul { list-style: none; margin-top: 8px; }
+  .ready li { padding-left: 20px; position: relative; margin-top: 4px; }
+  .ready li::before { content: "\2726"; position: absolute; left: 0; color: var(--gold); font-size: 12px; top: 2px; }
+  .ready .buy { margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(232, 196, 122, 0.18); }
+
+  .rev { background: var(--card); border: 1px solid var(--card-border); border-radius: 16px; padding: 18px 20px; margin-top: 14px; }
+  .rev-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .rev-head h2 { font-family: var(--serif); font-size: 25px; font-weight: 600; color: var(--gold-bright); line-height: 1.2; }
+  .rev dl { margin-top: 6px; }
+  .rev dt { font-size: 12.5px; color: var(--blush); font-weight: 600; margin-top: 10px; }
+  .rev dd { font-size: 15px; white-space: pre-line; overflow-wrap: anywhere; }
+  .rev img { display: block; max-width: 180px; max-height: 110px; border-radius: 10px; margin-top: 4px; object-fit: cover; object-position: top; }
+  .rev .none { color: var(--muted); font-size: 14px; margin-top: 8px; }
+  .consent { display: flex; gap: 12px; align-items: flex-start; margin-top: 24px; font-size: 15px; cursor: pointer; font-weight: 400 !important; }
+  .field.tight .consent { margin-top: 0; }
+  .consent input { width: 22px; height: 22px; flex: 0 0 22px; margin-top: 2px; accent-color: var(--gold); }
+
+  .done { text-align: center; padding-top: 56px; }
+  .done h1 { font-family: var(--serif); font-size: 54px; font-weight: 600; line-height: 1.06; margin: 0 auto; padding-bottom: 3px; }
+  .done p { margin: 14px auto 0; max-width: 500px; font-size: 16.5px; }
+  .edit-box { max-width: 520px; margin: 24px auto 0; background: var(--card); border: 1px solid var(--card-border); border-radius: 14px; padding: 16px 18px; font-size: 14.5px; }
+  .edit-box code { display: block; margin-top: 8px; font-family: inherit; overflow-wrap: anywhere; color: var(--gold-bright); font-size: 13px; }
+  .signoff { margin-top: 28px !important; color: var(--muted); }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .center-msg { text-align: center; padding: 60px 0; color: var(--muted); }
+
+  .opts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .opt-btn { border: 1px solid var(--card-border); background: var(--card); color: var(--text); border-radius: 999px; padding: 10px 16px; font-size: 14.5px; min-height: 44px; cursor: pointer; text-align: left; }
+  .opt-btn.on { background: var(--gold); border-color: var(--gold); color: var(--plum-deep); font-weight: 600; }
+  .opts.many .opt-btn { font-size: 13.5px; padding: 8px 13px; min-height: 40px; }
+  .opts.scale { display: grid; grid-template-columns: repeat(10, 1fr); gap: 6px; }
+  .opts.scale .opt-btn { padding: 8px 0; text-align: center; border-radius: 12px; }
+  .scale-ends { display: flex; justify-content: space-between; font-size: 12.5px; color: var(--muted); margin-top: 6px; }
+  .divider-space { height: 22px; }
+
+  .ai-box { position: relative; border: 1px solid rgba(232, 196, 122, 0.45); border-radius: 18px; padding: 20px 22px; margin-bottom: 26px; background: radial-gradient(circle at 100% 0%, rgba(196, 155, 255, 0.18), transparent 60%), radial-gradient(circle at 0% 100%, rgba(143, 214, 204, 0.12), transparent 55%), var(--card); }
+  .ai-box h2 { font-family: var(--serif); font-size: 26px; font-weight: 600; color: var(--gold-bright); line-height: 1.15; }
+  .ai-box p { font-size: 14.5px; margin-top: 6px; }
+  .ai-box ol { margin: 12px 0 0 20px; font-size: 14.5px; }
+  .ai-box ol li { margin-top: 6px; padding-left: 4px; }
+  .ai-box .ai-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+  .ai-box .btn { flex: 1 1 180px; }
+  .ai-box textarea { min-height: 120px; font-size: 14px; }
+  .ai-box .ai-note { margin-top: 10px; font-size: 14px; color: var(--gold-bright); }
+  .ai-box .ai-note.bad { color: #ffb3c1; }
+  .ai-prompt { margin-top: 12px; width: 100%; min-height: 160px; font-size: 13px; }
+  .ai-open { margin-top: 12px; }
+  .done-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 26px; }
+  .done-actions .btn { flex: 0 0 auto; text-decoration: none; }
+  .confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; }
+
+  @media (max-width: 600px) {
+    .wrap { padding: 0 16px 56px; }
+    .step-title { font-size: 38px; }
+    .group { padding: 20px 16px; }
+    .done h1 { font-size: 44px; }
+    .nav .btn-primary { max-width: none; }
+    .opts.scale { grid-template-columns: repeat(5, 1fr); }
+  }
+</style>
+</head>
+<body>
+<div class="preview-note" id="previewNote" hidden>Preview only. Answers you send from this page aren't saved yet.</div>
+<div class="wrap">
+  <div class="brand grad">Aurailia</div>
+  <div class="brand-sub">Wealth &amp; Money Audit</div>
+  <div id="app"></div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* Paste the Google script's web app URL here after setup. */
+  var SCRIPT_URL = '';
+  var LIVE = /^https:\/\/script\.google\.com\//.test(SCRIPT_URL);
+  var DRAFT_KEY = 'aurailiaWealthAuditDraft';
+  var BUY_URL = 'https://www.skool.com/embody-wealth/classroom/25192f82?md=08b1bca27c1b4ebea677b5ee2a15492b';
+  var EW_URL = 'https://www.skool.com/embody-wealth';
+  var SP_URL = 'https://www.skool.com/she-promotes-7924';
+
+  var HOW_BUY = 'I bought it in Embody Wealth';
+  var HOW_EW = 'I\'m a yearly Premium member of Embody Wealth';
+  var HOW_SP = 'I\'m a yearly VIP member of She Promotes';
+  var ELIST = ['No', 'Under 100', '100 to 500', 'Over 500'];
+  var INCOME = ['Under $1,000', '$1,000 to $3,000', '$3,000 to $5,000', '$5,000 to $10,000', 'Over $10,000'];
+  var SOURCES = ['Referrals', 'Instagram', 'Facebook', 'TikTok', 'YouTube', 'LinkedIn', 'My Skool community', 'Other Skool communities', 'My email list', 'Networking or events', 'Podcasts or guest spots', 'Paid ads', 'I\'m not sure yet'];
+  var ACCESS = ['Free', 'Paid', 'Free with a paid upgrade'];
+  var MEMBERS = ['Under 50', '50 to 200', '200 to 500', '500 to 1,000', 'Over 1,000'];
+  var ACTIVE = ['Just a few', 'About a quarter', 'About half', 'Most of them'];
+  var PATH = ['Yes, there\'s a clear path', 'Sort of', 'Not yet'];
+  var SCALE = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+  var HOURS = ['Under 5', '5 to 10', '10 to 20', 'Over 20'];
+
+  var paidCommunity = function () { return val('caccess') === 'Paid' || val('caccess') === 'Free with a paid upgrade'; };
+  var bought = function () { return val('how') === HOW_BUY; };
+
+  /* ---------- the questions ---------- */
+  var F = {
+    how: { label: 'How are you getting your audit?', type: 'choice', required: true, options: [HOW_BUY, HOW_EW, HOW_SP] },
+    skool: { label: 'Your Skool profile link', type: 'url', required: true, ph: 'https://www.skool.com/@your-name', help: function () { return bought() ? 'So I can find your purchase.' : has('how') ? 'So I can confirm your membership.' : 'So I can find your purchase or confirm your membership.'; } },
+    name: { label: 'Your name', required: true, auto: 'name' },
+    email: { label: 'Your email', type: 'email', required: true, auto: 'email', help: 'Private. I\'ll only use it for your audit.' },
+    business: { label: 'Your business name', optional: true },
+    bdate: { label: 'Your birth date', type: 'date', required: true },
+    btime: { label: 'Your birth time', type: 'time', required: function () { return val('bunsure') !== 'Yes'; }, help: 'Check your birth certificate, or ask your mom. Even a close guess helps.' },
+    bunsure: { label: 'I\'m not sure of my time', type: 'check', tight: true },
+    bplace: { label: 'Where were you born?', required: true, ph: 'City, state or region, country', help: 'City and country is perfect.' },
+
+    website: { label: 'Your website', type: 'url', optional: true, ph: 'yourwebsite.com' },
+    offerlink: { label: 'Link to your main offer or sales page', type: 'url', optional: true, ph: 'yourwebsite.com/work-with-me' },
+    social: { label: 'Instagram', type: 'url', optional: true, ph: '@yourname or link', base: 'https://www.instagram.com/', help: 'Add the ones you use. Skip the rest.' },
+    sfacebook: { label: 'Facebook', type: 'url', optional: true, ph: '@yourname or link', base: 'https://www.facebook.com/' },
+    stiktok: { label: 'TikTok', type: 'url', optional: true, ph: '@yourname or link', base: 'https://www.tiktok.com/@' },
+    syoutube: { label: 'YouTube', type: 'url', optional: true, ph: '@yourname or link', base: 'https://www.youtube.com/@' },
+    slinkedin: { label: 'LinkedIn', type: 'url', optional: true, ph: '@yourname or link', base: 'https://www.linkedin.com/in/' },
+    spinterest: { label: 'Pinterest', type: 'url', optional: true, ph: '@yourname or link', base: 'https://www.pinterest.com/' },
+    elist: { label: 'Do you have an email list?', type: 'choice', optional: true, options: ELIST },
+
+    income: { label: 'About how much does your business bring in each month?', type: 'choice', required: true, options: INCOME, help: 'Think of the last 3 months.' },
+    sources: { label: 'Where do most of your clients come from?', type: 'multi', optional: true, options: SOURCES, maxPick: 3, help: 'Pick up to 3.' },
+    journey: { label: 'How does someone go from finding you to paying you?', type: 'textarea', optional: true, help: 'Walk me through it, step by step. Easier to talk it out? Tap the microphone on your keyboard.', ph: 'They find my birth chart reels on Instagram, tap the link in my bio, join my free community, come to a live reading, then book a session.' },
+    stuck: { label: 'What feels stuck?', type: 'textarea', required: true },
+
+    cname: { label: 'Community name', gr: true },
+    clink: { label: 'Link to your community', type: 'url', gr: true, ph: 'https://www.skool.com/your-community/about' },
+    caccess: { label: 'Free or paid?', type: 'choice', options: ACCESS, gr: true },
+    ccost: { label: 'What does it cost?', optional: true, ph: '$9 a month, or $90 a year', showIf: paidCommunity },
+    cmembers: { label: 'How many members do you have?', type: 'choice', optional: true, options: MEMBERS },
+    cactive: { label: 'How many show up in a normal week?', type: 'choice', optional: true, options: ACTIVE, help: 'Posting, commenting or coming to lives.' },
+    cpath: { label: 'Does your community lead people to your paid offers?', type: 'choice', optional: true, options: PATH },
+    cheavy: { label: 'What feels heavy to keep up?', type: 'textarea', short: true, optional: true },
+    cshot1: { label: 'Screenshot 1', type: 'image', optional: true, size: 1800, showIf: paidCommunity },
+    cshot2: { label: 'Screenshot 2', type: 'image', optional: true, size: 1800, showIf: paidCommunity },
+    cshot3: { label: 'Screenshot 3', type: 'image', optional: true, size: 1800, showIf: paidCommunity },
+    cinvite: { label: 'Rather invite me in?', type: 'choice', optional: true, options: ['Yes, I\'ll invite you', 'No, the screenshots are enough'], showIf: paidCommunity },
+
+    mprice: { label: 'When you tell someone your price, what happens in you?', type: 'textarea', required: true, help: 'In your body, in your head, in what you say next.' },
+    mseen: { label: 'What stops you from showing up more?', type: 'textarea', required: true },
+    mreceive: { label: 'How easy is it for you to receive money, from 1 to 10?', type: 'scale', required: true, options: SCALE },
+
+    wand: { label: 'If you had a magic wand and could have your ideal business, what would it look like?', type: 'textarea', tall: true, required: true, help: 'Your days, your clients, your money, how it feels. Dream big here. Easier to talk it out? Tap the microphone on your keyboard.' },
+    change: { label: 'What do you most want to change in the next 90 days?', type: 'textarea', required: true },
+    hours: { label: 'How many hours a week can you give your business?', type: 'choice', required: true, options: HOURS }
+  };
+  var n;
+  for (n = 1; n <= 3; n++) {
+    F['o' + n + 'title'] = { label: 'Offer name', gr: true, ph: 'Birth Chart Reading' };
+    F['o' + n + 'price'] = { label: 'Price', gr: true, ph: '$150, or $47 a month' };
+    F['o' + n + 'link'] = { label: 'Link', type: 'url', optional: true, ph: 'yourwebsite.com/reading' };
+    F['o' + n + 'sold'] = { label: 'About how many did you sell in the last 90 days?', optional: true, help: 'A rough number is fine.', ph: '6' };
+  }
+  var OFFER_SFX = ['title', 'price', 'link', 'sold'];
+  var IMAGE_KEYS = ['cshot1', 'cshot2', 'cshot3'];
+  var URL_KEYS = ['skool', 'website', 'offerlink', 'social', 'sfacebook', 'stiktok', 'syoutube', 'slinkedin', 'spinterest', 'clink', 'o1link', 'o2link', 'o3link'];
+
+  var STEPS = [
+    { id: 'you', nav: 'You', title: 'Let\'s start with you', sub: 'This is how I pull your Human Design chart and get to know you.', keys: ['how', 'skool', 'name', 'email', 'business', 'bdate', 'btime', 'bunsure', 'bplace'] },
+    { id: 'find', nav: 'Where to find you', title: 'Where can I find you?', sub: 'I\'ll look at all of this for your audit. Add the ones you use and skip the rest.', keys: ['website', 'offerlink', 'social', 'sfacebook', 'stiktok', 'syoutube', 'slinkedin', 'spinterest', 'elist'] },
+    { id: 'business', nav: 'Your business', title: 'Your business right now', sub: 'Be honest here. This stays between us, and it\'s how I find where money is slipping through.', group: 'o', keys: ['income', 'sources', 'journey', 'stuck'] },
+    { id: 'community', nav: 'Your community', title: 'Your community', sub: 'Tell me about the community you run. No community yet? You can skip this step.', keys: ['cname', 'clink', 'caccess', 'ccost', 'cmembers', 'cactive', 'cpath', 'cheavy', 'cshot1', 'cshot2', 'cshot3', 'cinvite'] },
+    { id: 'money', nav: 'Money', title: 'Money and being seen', sub: 'No right answers here. Write it the way you\'d say it to a friend.', keys: ['mprice', 'mseen', 'mreceive'] },
+    { id: 'future', nav: 'Your 90 days', title: 'Your next 90 days', sub: 'Dream first. Then we get specific.', keys: ['wand', 'change', 'hours'] },
+    { id: 'review', nav: 'Review', title: 'Take one last look', sub: 'Make sure it sounds like you, then send it to me.' }
+  ];
+
+  var app = document.getElementById('app');
+  var S = { step: 0, a: {}, images: {}, existing: {}, offers: 1, consent: false, token: '', errors: {}, sending: false, formError: '', busy: 0, confirmRemove: '' };
+
+  /* ---------- helpers ---------- */
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function val(k) { var v = S.a[k]; return Array.isArray(v) ? v : String(v == null ? '' : v); }
+  function has(k) { var v = val(k); return Array.isArray(v) ? v.length > 0 : v.trim() !== ''; }
+  function isReq(f) { return typeof f.required === 'function' ? f.required() : !!f.required; }
+  function byEmail() { return val('how') === HOW_SP; }
+  function cur() { return STEPS[Math.min(S.step, STEPS.length - 1)]; }
+  function shown(k) { var f = F[k]; return !f.showIf || f.showIf(); }
+  function imgSrc(k) {
+    if (S.images[k] && S.images[k].preview) return S.images[k].preview;
+    if (S.images[k] === null) return '';
+    var u = S.existing[k] || '';
+    var m = u.match(/\/d\/([\w-]{10,})/);
+    return m ? 'https://lh3.googleusercontent.com/d/' + m[1] + '=w600' : u;
+  }
+  function normUrl(k) {
+    var f = F[k], v = String(val(k)).trim();
+    if (!v || !f || f.type !== 'url') return;
+    if (f.base && /^@?[\w.]+$/.test(v) && (v.charAt(0) === '@' || v.indexOf('.') === -1)) v = f.base + v.replace(/^@/, '');
+    else if (k === 'skool' && /^@[\w.-]+$/.test(v)) v = 'https://www.skool.com/' + v;
+    else if (!/^https?:\/\//i.test(v)) v = 'https://' + v.replace(/^\/+/, '');
+    S.a[k] = v;
+  }
+  function todayStr() { var d = new Date(); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
+  function okUrl(v) { return /^https?:\/\/[^\s/]+\.[^\s]+$/i.test(v); }
+  function saveDraft() { if (S.token) return; try { localStorage.setItem(DRAFT_KEY, JSON.stringify({ a: S.a, offers: S.offers, step: S.step })); } catch (e) { /* fine */ } }
+  function loadDraft() {
+    try {
+      var d = JSON.parse(localStorage.getItem(DRAFT_KEY) || 'null');
+      if (d && d.a) { S.a = d.a; S.offers = Math.min(Math.max(d.offers == null ? 1 : d.offers, 0), 3); S.step = Math.min(Math.max(0, d.step || 0), STEPS.length - 1); }
+    } catch (e) { /* fresh start */ }
+  }
+  function clearDraft() { try { localStorage.removeItem(DRAFT_KEY); } catch (e) { /* fine */ } }
+
+  /* ---------- drawing a question ---------- */
+  function fieldHtml(k) {
+    var f = F[k];
+    if (!shown(k)) return '';
+    var err = S.errors[k];
+    var helpTxt = typeof f.help === 'function' ? f.help() : f.help;
+    var lab = esc(f.label) + (f.optional ? ' <span class="opt">(optional)</span>' : '');
+    var help = helpTxt ? '<div class="help" id="' + k + '-h">' + esc(helpTxt) + '</div>' : '';
+    var errH = err ? '<div class="err" id="' + k + '-e">' + esc(err) + '</div>' : '';
+    var h = '<div class="field' + (f.tight ? ' tight' : '') + (err ? ' invalid' : '') + '" data-field="' + k + '">';
+    if (f.type === 'check') {
+      return h + '<label class="consent"><input type="checkbox" data-check="' + k + '"' + (val(k) === 'Yes' ? ' checked' : '') + '><span>' + esc(f.label) + '</span></label>' + errH + '</div>';
+    }
+    if (f.type === 'image') {
+      var src = imgSrc(k);
+      h += '<div class="label">' + lab + '</div>' + help;
+      h += '<label class="pick"><input type="file" accept="image/*" data-image="' + k + '" aria-label="' + esc(f.label) + '">';
+      h += src ? '<img class="pick-img" src="' + esc(src) + '" alt="">' : '<span class="pick-empty"><b>Choose a screenshot</b><small>JPG or PNG</small></span>';
+      h += '</label>';
+      if (src) h += '<div class="pick-actions"><button type="button" class="link-btn" data-replace="' + k + '">Choose a different one</button><button type="button" class="link-btn" data-clear="' + k + '">Remove</button></div>';
+      return h + errH + '</div>';
+    }
+    if (f.type === 'choice' || f.type === 'multi' || f.type === 'scale') {
+      var cur2 = f.type === 'multi' ? (Array.isArray(val(k)) ? val(k) : []) : [val(k)];
+      h += '<div class="label" id="' + k + '-l">' + lab + '</div>' + help;
+      h += '<div class="opts' + (f.type === 'scale' ? ' scale' : f.type === 'multi' && f.options.length > 8 ? ' many' : '') + '" role="group" aria-labelledby="' + k + '-l">';
+      f.options.forEach(function (o) {
+        var on = cur2.indexOf(o) !== -1;
+        h += '<button type="button" class="opt-btn' + (on ? ' on' : '') + '" aria-pressed="' + on + '" data-pick="' + k + '" data-v="' + esc(o) + '">' + esc(o) + '</button>';
+      });
+      h += '</div>';
+      if (f.type === 'scale') h += '<div class="scale-ends"><span>1 = it feels hard</span><span>10 = it flows in easily</span></div>';
+      return h + errH + '</div>';
+    }
+    h += '<label for="' + k + '">' + lab + '</label>' + help;
+    if (f.type === 'date' || f.type === 'time') return h + '<input type="' + f.type + '" id="' + k + '" data-a="' + k + '" value="' + esc(val(k)) + '"' + (f.type === 'date' ? ' max="' + todayStr() + '"' : '') + (err ? ' aria-invalid="true"' : '') + '>' + errH + '</div>';
+    var attrs = ' id="' + k + '" data-a="' + k + '"' + (f.ph ? ' placeholder="' + esc(f.ph) + '"' : '') + (f.max ? ' maxlength="' + f.max + '"' : '') + (f.auto ? ' autocomplete="' + f.auto + '"' : '') + (err ? ' aria-invalid="true" aria-describedby="' + k + '-e"' : '');
+    if (f.type === 'textarea') h += '<textarea' + (f.tall ? ' class="tall"' : f.short ? ' class="short"' : '') + attrs + '>' + esc(val(k)) + '</textarea>';
+    else h += '<input type="' + (f.type === 'email' ? 'email' : 'text') + '"' + (f.type === 'url' ? ' inputmode="url" autocapitalize="off" autocorrect="off" spellcheck="false"' : '') + attrs + ' value="' + esc(val(k)) + '">';
+    if (f.max) h += '<div class="count" data-count="' + k + '">' + String(val(k)).length + ' / ' + f.max + '</div>';
+    return h + errH + '</div>';
+  }
+  function offersHtml() {
+    var h = '';
+    for (var i = 1; i <= S.offers; i++) {
+      h += '<div class="group"><div class="group-head"><h2>' + (i === 1 ? 'Your main offer' : 'Offer ' + i) + '</h2>';
+      h += '<button type="button" class="link-btn" data-remove="o' + i + '">' + (S.confirmRemove === 'o' + i ? 'Tap again to remove' : 'Remove') + '</button></div>';
+      OFFER_SFX.forEach(function (s) { h += fieldHtml('o' + i + s); });
+      h += '</div>';
+    }
+    if (S.offers < 3) h += '<button type="button" class="btn btn-ghost add" data-add="o">' + (S.offers ? 'Add another offer' : 'Add an offer') + '</button>';
+    return h;
+  }
+  function communityHtml() {
+    var h = '';
+    STEPS[3].keys.forEach(function (k) {
+      if (k === 'cshot1' && paidCommunity()) h += '<div class="shots"><div class="shots-title">Help me peek inside</div><p class="help">I can\'t see inside a paid community. Add up to 3 screenshots, like your About page, your Classroom and a post or two. Or invite me in.</p>';
+      h += fieldHtml(k);
+      if (k === 'cinvite' && paidCommunity()) h += '</div>';
+    });
+    return h;
+  }
+
+  /* ---------- review ---------- */
+  function shownVal(k) {
+    var f = F[k], v = val(k);
+    if (!shown(k)) return '';
+    if (f.type === 'image') { var s = imgSrc(k); return s ? '<img src="' + esc(s) + '" alt="">' : ''; }
+    if (f.type === 'check') return v === 'Yes' ? 'Yes' : '';
+    if (Array.isArray(v)) return v.length ? esc(v.join(', ')) : '';
+    if (f.type === 'date' && /^\d{4}-\d{2}-\d{2}$/.test(v)) { var dp = v.split('-'); try { return esc(new Date(+dp[0], +dp[1] - 1, +dp[2]).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })); } catch (e) { return esc(v); } }
+    if (f.type === 'time' && /^\d{1,2}:\d{2}/.test(v)) { var hh = +v.split(':')[0], mm = v.split(':')[1].slice(0, 2); return esc(((hh % 12) || 12) + ':' + mm + (hh < 12 ? ' AM' : ' PM')); }
+    return String(v).trim() ? esc(String(v).trim()) : '';
+  }
+  function revCard(idx, title, keys) {
+    var rows = keys.map(function (k) { var v = shownVal(k); return v ? '<dt>' + esc(F[k].label) + '</dt><dd>' + v + '</dd>' : ''; }).join('');
+    return '<div class="rev"><div class="rev-head"><h2>' + esc(title) + '</h2><button type="button" class="link-btn" data-goto="' + idx + '">Edit</button></div>' + (rows ? '<dl>' + rows + '</dl>' : '<p class="none">Nothing added.</p>') + '</div>';
+  }
+  function consentText() {
+    var who = val('how') === HOW_SP ? 'I\'m a yearly VIP member of She Promotes™' : val('how') === HOW_EW ? 'I\'m a yearly Premium member of Embody Wealth' : 'I bought my Wealth & Money Audit in Embody Wealth';
+    return who + ', and everything I shared is true to the best of my knowledge.';
+  }
+  function reviewHtml() {
+    var o = [];
+    for (var i = 1; i <= S.offers; i++) OFFER_SFX.forEach(function (s) { o.push('o' + i + s); });
+    var h = revCard(0, 'You', STEPS[0].keys) + revCard(1, 'Where to find you', STEPS[1].keys) + revCard(2, 'Your business', o.concat(STEPS[2].keys));
+    h += revCard(3, 'Your community', STEPS[3].keys) + revCard(4, 'Money and being seen', STEPS[4].keys) + revCard(5, 'Your next 90 days', STEPS[5].keys);
+    h += '<div class="field' + (S.errors.consent ? ' invalid' : '') + '"><label class="consent"><input type="checkbox" id="consent"' + (S.consent ? ' checked' : '') + '><span>' + esc(consentText()) + '</span></label>' + (S.errors.consent ? '<div class="err">' + esc(S.errors.consent) + '</div>' : '') + '</div>';
+    return h;
+  }
+
+  /* ---------- screens ---------- */
+  function render(top) {
+    var st = cur(), i = STEPS.indexOf(st), h = '';
+    S.step = i;
+    h += '<div class="progress"><div class="bars" style="grid-template-columns:repeat(' + STEPS.length + ',1fr)" aria-hidden="true">';
+    STEPS.forEach(function (s, j) { h += '<i class="' + (j <= i ? 'on' : '') + '"></i>'; });
+    h += '</div><div class="progress-label"><span>Step ' + (i + 1) + ' of ' + STEPS.length + '</span><span>' + esc(st.nav) + '</span></div></div>';
+    var title = S.token && i === 0 ? 'Update your answers' : st.title;
+    h += '<h1 class="step-title grad" tabindex="-1" id="stepTitle">' + esc(title) + '</h1>';
+    h += '<p class="step-sub">' + esc(st.sub) + '</p><form class="form-body" id="form" novalidate>';
+    if (i === 0 && !S.token) h += '<div class="ready"><b>This takes about 15 minutes, and your answers save on this device as you go.</b> Have these handy:<ul><li>Your birth date, time and city</li><li>Links to your website, socials and community</li><li>Your offers and what you charge</li></ul><div class="buy">Haven\'t bought your audit yet? It\'s $111 inside Embody Wealth. <a href="' + BUY_URL + '" target="_blank" rel="noopener">Get it here</a>.</div></div>';
+    if (i === 0) h += aiHtml();
+    if (st.id === 'business') { h += offersHtml(); h += '<div class="divider-space"></div>'; st.keys.forEach(function (k) { h += fieldHtml(k); }); }
+    else if (st.id === 'community') h += communityHtml();
+    else if (st.id === 'review') h += reviewHtml();
+    else st.keys.forEach(function (k) { h += fieldHtml(k); });
+    h += '<div class="hp" aria-hidden="true"><label>Leave this empty<input type="text" id="hpField" tabindex="-1" autocomplete="off"></label></div>';
+    if (S.formError) h += '<div class="form-error" role="alert">' + esc(S.formError) + '</div>';
+    var last = i === STEPS.length - 1;
+    var empty = st.id === 'community' && !communityStarted();
+    h += '<div class="nav">' + (i > 0 ? '<button type="button" class="btn btn-ghost" id="backBtn">Back</button>' : '');
+    h += '<button type="submit" class="btn btn-primary" id="nextBtn"' + (S.sending || S.busy ? ' disabled' : '') + '>' + (S.sending ? 'Sending...' : S.busy ? 'Getting your screenshot ready...' : last ? (S.token ? 'Save my changes' : 'Send to Aurailia') : empty ? 'Skip' : 'Next') + '</button></div></form>';
+    if (!S.token) h += '<p class="saved-note">Your answers save on this device as you go. If you leave before sending, you\'ll need to add your screenshots again.</p>';
+    app.innerHTML = h;
+    if (top) { window.scrollTo(0, 0); var t = document.getElementById('stepTitle'); if (t) t.focus({ preventScroll: true }); }
+  }
+  function renderDone(res) {
+    var first = String(val('name')).trim().split(/\s+/)[0];
+    var h = '<div class="done"><h1 class="grad">' + (S.token ? 'Your changes are in' : 'You\'re in' + (first ? ', ' + esc(first) : '')) + '</h1>';
+    if (S.token) h += '<p>Thank you. I\'ll use your updated answers for your audit.</p>';
+    else if (byEmail()) h += '<p>Your answers came through. Within 72 hours, I\'ll read your chart and go through your website, socials and community. Then your audit lands in your inbox. Check spam or promotions if you don\'t see it.</p>';
+    else h += '<p>Your answers came through. Within 72 hours, I\'ll read your chart and go through your website, socials and community. Then I\'ll email you to book your 1:1 call, and we\'ll walk through your audit together.</p>';
+    if (res && res.editLink && !S.token) h += '<div class="edit-box">' + (res.emailed ? 'I emailed you a private link in case you want to add something before I start.' : 'Save this private link in case you want to add something before I start.') + ' Please keep it to yourself, since anyone with it can change your answers.' + (res.emailed ? '' : '<code>' + esc(res.editLink) + '</code>') + '</div>';
+    if (res && res.imageProblems && res.imageProblems.length) h += '<p>One of your screenshots didn\'t save. Please send it to team@aurailia.com.</p>';
+    if (!LIVE) h += '<p>This is the preview, so nothing was saved.</p>';
+    h += '<div class="done-actions"><a class="btn btn-primary" href="' + (byEmail() ? SP_URL : EW_URL) + '">' + (byEmail() ? 'Back to She Promotes' : 'Back to Embody Wealth') + '</a></div>';
+    h += '<p class="signoff">I believe in you. To living our dreams.<br>Aurailia &#10022;</p></div>';
+    app.innerHTML = h; window.scrollTo(0, 0);
+    confetti();
+  }
+
+  /* ---------- Let AI fill it in ---------- */
+  var AI_PROMPT = [
+    'I\'m filling out the form for my Wealth & Money Audit with Aurailia. Please help me fill it in.',
+    '',
+    'Start with what you already know about me from our past chats, your memory of me, or my project files. Add anything I paste below this message, like my website, my Skool about page or my offer pages. Keep my own words where you can. For my links (website, main offer page, Instagram, Facebook, other socials, Skool profile, community link), check my memory, our past chats and my project files. If you can search the web, look them up too. Show me every link you found so I can confirm it. Never make up links, prices, numbers or details. If something isn\'t there, leave it as "".',
+    '',
+    'Some answers have to come from me, not from you. Ask me these one at a time, in this order, and keep my exact words. Fix spelling only. Don\'t write them for me:',
+    '1. When you tell someone your price, what happens in you?',
+    '2. What stops you from showing up more?',
+    '3. How easy is it for you to receive money, from 1 to 10?',
+    '4. If you had a magic wand and could have your ideal business, what would it look like?',
+    '5. What do you most want to change in the next 90 days?',
+    'If you don\'t already know them, also ask me how much my business brings in each month, about how many of each offer I sold in the last 90 days, and how many hours a week I can give my business. Never guess those.',
+    '',
+    'Leave out my birth details and my email. I\'ll type those into the form myself.',
+    '',
+    'Here\'s the code you\'ll fill in at the end. Don\'t send it yet:',
+    '',
+    '{',
+    '  "name": "my full name",',
+    '  "business": "my business name",',
+    '  "skool": "my Skool profile link",',
+    '  "website": "my website link",',
+    '  "offerLink": "link to my main offer or sales page",',
+    '  "socials": { "instagram": "", "facebook": "", "tiktok": "", "youtube": "", "linkedin": "", "pinterest": "" },',
+    '  "emailList": "one from the email list options below",',
+    '  "offers": [ { "title": "offer name", "price": "like $150 or $47 a month", "link": "", "sold": "about how many in the last 90 days" } ],',
+    '  "monthlyIncome": "one from the income options below",',
+    '  "clientSources": ["up to 3 from the client source options below"],',
+    '  "journey": "how someone goes from finding me to paying me, step by step, in my words",',
+    '  "stuck": "what feels stuck, in my words",',
+    '  "community": { "name": "", "link": "", "access": "Free, Paid, or Free with a paid upgrade", "cost": "", "members": "one from the member options below", "weeklyActive": "one from the weekly options below", "leadsToOffers": "one from the path options below", "heavy": "what feels heavy to keep up, in my words" },',
+    '  "price": "my exact words",',
+    '  "seen": "my exact words",',
+    '  "receive": "a number from 1 to 10",',
+    '  "wand": "my exact words",',
+    '  "change": "my exact words",',
+    '  "hours": "one from the hours options below"',
+    '}',
+    '',
+    'Up to 3 offers, my main one first. Leave "community" empty if I don\'t run one.',
+    '',
+    'Email list options: ' + ELIST.join('; ') + '.',
+    'Income options: ' + INCOME.join('; ') + '.',
+    'Client source options: ' + SOURCES.join('; ') + '.',
+    'Member options: ' + MEMBERS.join('; ') + '.',
+    'Weekly options: ' + ACTIVE.join('; ') + '.',
+    'Path options: ' + PATH.join('; ') + '.',
+    'Hours options: ' + HOURS.join('; ') + '.',
+    '',
+    'HOW TO DO THIS',
+    '1. First, show me what you found in plain, easy-to-read words, section by section, like a little summary I can skim. No code yet. Point out anything you\'re not sure about or couldn\'t find.',
+    '2. Then ask me the questions above that need my own words, one at a time. Only ask about other things if you don\'t know enough, and keep those short.',
+    '3. Then ask me: Does this look right? Tell me what to change, or say looks good.',
+    '4. When I say it looks good, send the filled-in code in one code block, nothing else in the block.',
+    '5. Right under the code block, tell me the next step in these words: Tap Copy on the code box above. Go back to the audit form, paste it in the box that says Paste the AI\'s answer here, then tap Fill in my form. Then check each step, change anything that doesn\'t sound like you, add your birth details, and send it.',
+    '',
+    'Anything extra I want you to use (this can be empty):'
+  ].join('\n');
+  /* What she's already filled in goes into the prompt, so the AI keeps it and only fills the gaps */
+  function knownInfo() {
+    var L = [], add = function (label, k) { var v = val(k); v = Array.isArray(v) ? v.join(', ') : String(v).trim(); if (v) L.push(label + ': ' + v); };
+    add('Name', 'name'); add('Business', 'business'); add('Skool profile', 'skool'); add('Website', 'website'); add('Main offer page', 'offerlink');
+    add('Instagram', 'social'); add('Facebook', 'sfacebook'); add('TikTok', 'stiktok'); add('YouTube', 'syoutube'); add('LinkedIn', 'slinkedin'); add('Pinterest', 'spinterest');
+    for (var i = 1; i <= S.offers; i++) { if (has('o' + i + 'title')) L.push('Offer ' + i + ': ' + val('o' + i + 'title') + (has('o' + i + 'price') ? ' (' + val('o' + i + 'price') + ')' : '') + (has('o' + i + 'link') ? ' ' + val('o' + i + 'link') : '')); }
+    if (has('cname')) L.push('My community: ' + val('cname') + (has('clink') ? ' ' + val('clink') : ''));
+    return L.length ? 'WHAT I ALREADY FILLED IN (keep these unless I tell you to change them, and fill in what\'s missing):\n' + L.join('\n') + '\n\n' : '';
+  }
+  function promptText() {
+    var tail = 'Anything extra I want you to use (this can be empty):';
+    return AI_PROMPT.replace(tail, knownInfo() + tail);
+  }
+  function aiHtml() {
+    var h = '<div class="ai-box"><h2>Want AI to fill this in for you?</h2>';
+    h += '<p>Save yourself the typing. Claude or ChatGPT can fill in most of this form with you. Then you click through each step and change anything that doesn\'t sound like you.</p>';
+    if (!S.aiOpen) return h + '<button type="button" class="btn btn-ghost ai-open" id="aiToggle">Show me how</button></div>';
+    h += '<ol><li>Tap <b>Copy the prompt</b>.</li><li>Open a new chat in Claude or ChatGPT and paste it in.</li><li>Under it, paste your website, your Skool about page or your offer pages, or just talk about your business. If it already knows you from past chats, it uses that. Easier to talk? Tap the microphone on your keyboard.</li><li>It shows you what it found, then asks you a few questions only you can answer. Answer in your own words.</li><li>When you say <b>looks good</b>, it gives you a code box. Tap <b>Copy</b> on it, paste it in the box below and tap <b>Fill in my form</b>.</li></ol>';
+    h += '<div class="ai-row"><button type="button" class="btn btn-primary" id="aiCopy">' + (S.aiCopied ? 'Copied. Now open Claude or ChatGPT' : 'Copy the prompt') + '</button></div>';
+    if (S.aiShowPrompt) h += '<textarea class="ai-prompt" id="aiPromptBox" readonly aria-label="The prompt to copy">' + esc(promptText()) + '</textarea>';
+    h += '<div class="field" style="margin:16px 0 0"><label for="aiPaste">Paste the AI\'s answer here</label><textarea id="aiPaste" placeholder="Paste the whole answer, including the part in curly brackets">' + esc(S.aiText || '') + '</textarea></div>';
+    h += '<div class="ai-row"><button type="button" class="btn btn-primary" id="aiFill">Fill in my form</button></div>';
+    if (S.aiNote) h += '<div class="ai-note' + (S.aiBad ? ' bad' : '') + '" role="status">' + esc(S.aiNote) + '</div>';
+    return h + '</div>';
+  }
+  function pickJson(txt) {
+    txt = String(txt || '').replace(/[“”]/g, '"').replace(/[‘’]/g, "'");
+    var fence = txt.match(/```(?:json)?\s*([\s\S]*?)```/i);
+    if (fence) txt = fence[1];
+    var a = txt.indexOf('{'), b = txt.lastIndexOf('}');
+    if (a === -1 || b <= a) return null;
+    try { return JSON.parse(txt.slice(a, b + 1)); } catch (e) { return null; }
+  }
+  function str(x, max) { var v = String(x == null ? '' : x).replace(/\r\n/g, '\n').trim(); return max ? v.slice(0, max) : v; }
+  function arr(x) { return Array.isArray(x) ? x : (x ? String(x).split(/\s*[,;]\s*/) : []); }
+  function known(list, opts, max) {
+    var out = [];
+    arr(list).forEach(function (v) {
+      var k = str(v).toLowerCase(); if (!k) return;
+      var hit = null;
+      opts.forEach(function (o) { if (!hit && o.toLowerCase() === k) hit = o; });
+      if (!hit) opts.forEach(function (o) { if (!hit && (o.toLowerCase().indexOf(k) !== -1 || k.indexOf(o.toLowerCase()) !== -1)) hit = o; });
+      if (hit && out.indexOf(hit) === -1) out.push(hit);
+    });
+    return max ? out.slice(0, max) : out;
+  }
+  function oneOf(v, opts) { var x = str(v); if (!x) return ''; var r = [], lx = x.toLowerCase(); opts.forEach(function (o) { if (o.toLowerCase() === lx) r.push(o); }); return r[0] || ''; }
+  function accessOf(v) {
+    v = str(v).toLowerCase(); if (!v) return '';
+    if (/upgrade|premium|free.*paid|paid.*free/.test(v)) return 'Free with a paid upgrade';
+    if (/^free/.test(v)) return 'Free';
+    return 'Paid';
+  }
+  function aiFill(j) {
+    var n = 0, i;
+    var set = function (k, v) { if (Array.isArray(v) ? v.length : str(v)) { S.a[k] = Array.isArray(v) ? v : str(v, 6000); n++; } };
+    set('name', j.name); set('business', j.business); set('skool', j.skool); set('website', j.website); set('offerlink', j.offerLink || j.offerlink);
+    var so = j.socials || {};
+    set('social', so.instagram || j.instagram); set('sfacebook', so.facebook); set('stiktok', so.tiktok); set('syoutube', so.youtube); set('slinkedin', so.linkedin); set('spinterest', so.pinterest);
+    set('elist', oneOf(j.emailList, ELIST) || known([j.emailList], ELIST, 1)[0]);
+    var offers = (Array.isArray(j.offers) ? j.offers : []).filter(function (o) { return o && str(o.title); }).slice(0, 3);
+    if (offers.length) {
+      for (i = 1; i <= 3; i++) OFFER_SFX.forEach(function (sx) { delete S.a['o' + i + sx]; });
+      offers.forEach(function (o, x) { var p = 'o' + (x + 1); set(p + 'title', o.title); set(p + 'price', o.price); set(p + 'link', o.link); set(p + 'sold', o.sold); });
+      S.offers = offers.length;
+    }
+    set('income', oneOf(j.monthlyIncome, INCOME));
+    set('sources', known(j.clientSources, SOURCES, 3));
+    set('journey', j.journey); set('stuck', j.stuck);
+    var c = j.community || {};
+    if (str(c.name)) {
+      set('cname', c.name); set('clink', c.link); set('caccess', accessOf(c.access)); set('ccost', c.cost);
+      set('cmembers', oneOf(c.members, MEMBERS)); set('cactive', oneOf(c.weeklyActive, ACTIVE)); set('cpath', known([c.leadsToOffers], PATH, 1)[0]); set('cheavy', c.heavy);
+    }
+    set('mprice', j.price); set('mseen', j.seen);
+    var rc = String(j.receive == null ? '' : j.receive).match(/\d+/); if (rc && +rc[0] >= 1 && +rc[0] <= 10) set('mreceive', String(+rc[0]));
+    set('wand', j.wand); set('change', j.change); set('hours', oneOf(j.hours, HOURS));
+    URL_KEYS.forEach(function (k) { if (has(k)) normUrl(k); });
+    return n;
+  }
+  function copyText(text, ok, fail) {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(ok, fail); return; }
+    } catch (e) { /* fall through */ }
+    fail();
+  }
+
+  /* ---------- confetti for the thank you page ---------- */
+  function confetti() {
+    try { if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; } catch (e) { /* fine */ }
+    var cv = document.createElement('canvas'); cv.className = 'confetti'; cv.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(cv);
+    var ctx = cv.getContext && cv.getContext('2d'); if (!ctx) { cv.parentNode.removeChild(cv); return; }
+    var dpr = Math.min(window.devicePixelRatio || 1, 2), W = 0, H = 0;
+    var size = function () { W = window.innerWidth; H = window.innerHeight; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); };
+    size(); window.addEventListener('resize', size);
+    var COLORS = ['#e8c47a', '#f3d89b', '#c9a3ff', '#f4b6c8', '#ffffff', '#8fd6cc', '#7b3fa0'];
+    var bits = [], k;
+    for (k = 0; k < 170; k++) bits.push({
+      x: W / 2 + (Math.random() - 0.5) * W * 0.3, y: H * 0.32 + (Math.random() - 0.5) * 40,
+      vx: (Math.random() - 0.5) * 13, vy: -Math.random() * 13 - 4,
+      w: 6 + Math.random() * 7, h: 4 + Math.random() * 5, r: Math.random() * Math.PI, vr: (Math.random() - 0.5) * 0.3,
+      c: COLORS[k % COLORS.length], round: Math.random() < 0.3, wob: Math.random() * 10
+    });
+    var start = Date.now();
+    var tick = function () {
+      var t = Date.now() - start;
+      ctx.clearRect(0, 0, W, H);
+      var alive = 0;
+      bits.forEach(function (b) {
+        b.vy += 0.26; b.vx *= 0.985; b.vy *= 0.99; b.x += b.vx + Math.sin((t / 260) + b.wob) * 0.6; b.y += b.vy; b.r += b.vr;
+        if (b.y < H + 20) alive++;
+        ctx.save(); ctx.globalAlpha = t > 3600 ? Math.max(0, 1 - (t - 3600) / 900) : 1;
+        ctx.translate(b.x, b.y); ctx.rotate(b.r); ctx.fillStyle = b.c;
+        if (b.round) { ctx.beginPath(); ctx.arc(0, 0, b.h / 2 + 1, 0, Math.PI * 2); ctx.fill(); }
+        else ctx.fillRect(-b.w / 2, -b.h / 2, b.w, b.h * Math.abs(Math.cos(b.r * 2)) + 1);
+        ctx.restore();
+      });
+      if (alive && t < 4500) window.requestAnimationFrame(tick);
+      else { window.removeEventListener('resize', size); if (cv.parentNode) cv.parentNode.removeChild(cv); }
+    };
+    window.requestAnimationFrame(tick);
+  }
+
+  /* ---------- checking answers ---------- */
+  function communityStarted() { return has('cname') || has('clink') || has('caccess'); }
+  function check(k, errs, groupMode) {
+    var f = F[k]; if (!shown(k)) return;
+    var need = isReq(f) || (groupMode && f.gr);
+    if (f.type === 'image' || f.type === 'check') return;
+    if (f.type === 'choice' || f.type === 'multi' || f.type === 'scale') { if (need && !has(k)) errs[k] = 'Please pick one.'; return; }
+    var v = String(val(k)).trim();
+    if (need && !v) { errs[k] = f.type === 'time' ? 'Please add your birth time, or check the box if you\'re not sure.' : 'Please fill this in.'; return; }
+    if (v && f.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) errs[k] = 'That email doesn\'t look right. Mind checking it?';
+    if (v && f.type === 'url') { normUrl(k); if (!okUrl(val(k))) errs[k] = 'That link doesn\'t look right. Mind checking it?'; }
+    if (v && f.type === 'date' && v > todayStr()) errs[k] = 'That date hasn\'t happened yet. Mind checking it?';
+  }
+  function validate() {
+    var st = cur(), errs = {}, i;
+    if (st.id === 'business') {
+      for (i = 1; i <= S.offers; i++) OFFER_SFX.forEach(function (s) { check('o' + i + s, errs, true); });
+      st.keys.forEach(function (k) { check(k, errs, false); });
+    } else if (st.id === 'community') {
+      var started = communityStarted();
+      st.keys.forEach(function (k) { check(k, errs, started); });
+    } else if (st.id === 'review') {
+      if (!S.consent) errs.consent = 'Please check this box so I can start your audit.';
+    } else st.keys.forEach(function (k) { check(k, errs, false); });
+    return errs;
+  }
+  function showErrors(errs) {
+    S.errors = errs; render(false);
+    var k = Object.keys(errs)[0];
+    var box = k === 'consent' ? document.getElementById('consent') : document.querySelector('[data-field="' + k + '"]');
+    if (box) { var inp = box.matches && box.matches('input') ? box : box.querySelector('input, textarea, button'); if (inp) inp.focus({ preventScroll: true }); box.scrollIntoView({ block: 'center' }); }
+  }
+
+  /* ---------- images ---------- */
+  function readImage(file, max, done, fail) {
+    var url = URL.createObjectURL(file), img = new Image();
+    img.onload = function () {
+      try {
+        var sc = Math.min(1, max / Math.max(img.naturalWidth, img.naturalHeight));
+        var w = Math.max(1, Math.round(img.naturalWidth * sc)), hh = Math.max(1, Math.round(img.naturalHeight * sc));
+        var c = document.createElement('canvas'); c.width = w; c.height = hh;
+        var x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, w, hh); x.drawImage(img, 0, 0, w, hh);
+        var d = c.toDataURL('image/jpeg', 0.86); URL.revokeObjectURL(url);
+        done({ preview: d, data: d.split(',')[1], mime: 'image/jpeg' });
+      } catch (e) { URL.revokeObjectURL(url); fail(); }
+    };
+    img.onerror = function () { URL.revokeObjectURL(url); fail(); };
+    img.src = url;
+  }
+
+  /* ---------- removing an offer ---------- */
+  function removeOffer(idx) {
+    for (var i = idx; i <= S.offers; i++) OFFER_SFX.forEach(function (s) {
+      var from = 'o' + (i + 1) + s, to = 'o' + i + s;
+      if (i < S.offers) S.a[to] = S.a[from]; else delete S.a[to];
+    });
+    S.offers--;
+  }
+
+  /* ---------- sending ---------- */
+  function payload() {
+    var A = {}, i;
+    var put = function (k, v) { A[k] = Array.isArray(v) ? v.join('; ') : String(v == null ? '' : v).trim(); };
+    ['how', 'skool', 'name', 'email', 'business', 'bdate', 'btime', 'bunsure', 'bplace'].concat(STEPS[1].keys, STEPS[2].keys, STEPS[4].keys, STEPS[5].keys).forEach(function (k) { put(k, val(k)); });
+    for (i = 1; i <= 3; i++) OFFER_SFX.forEach(function (s) { put('o' + i + s, i <= S.offers ? val('o' + i + s) : ''); });
+    ['cname', 'clink', 'caccess', 'ccost', 'cmembers', 'cactive', 'cpath', 'cheavy', 'cinvite'].forEach(function (k) { put(k, shown(k) ? val(k) : ''); });
+    A.formState = JSON.stringify({ offers: S.offers });
+    return A;
+  }
+  function submit() {
+    S.sending = true; S.formError = ''; render(false);
+    var images = {};
+    IMAGE_KEYS.forEach(function (k) {
+      if (!shown(k)) { if (S.token && S.existing[k]) images[k] = null; return; }
+      if (S.images[k] === null) images[k] = null;
+      else if (S.images[k] && S.images[k].data) images[k] = { data: S.images[k].data, mime: S.images[k].mime };
+    });
+    var hp = document.getElementById('hpField');
+    var body = { answers: payload(), images: images, consent: S.consent === true, token: S.token, hp: hp ? hp.value : '' };
+    if (!LIVE) { S.sending = false; window.__lastPayload = body; clearDraft(); renderDone({ editLink: 'preview', emailed: true }); return; }
+    fetch(SCRIPT_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) })
+      .then(function (r) { return r.json(); })
+      .then(function (res) { S.sending = false; if (!res || !res.ok) throw new Error((res && res.error) || 'failed'); clearDraft(); renderDone(res); })
+      .catch(function () {
+        S.sending = false;
+        S.formError = 'That didn\'t go through, but your answers are still here. Please try again. If it keeps happening, email team@aurailia.com.';
+        render(false); var e = document.querySelector('.form-error'); if (e) e.scrollIntoView({ block: 'center' });
+      });
+  }
+  /* bring saved answers back into the form */
+  function unpack(ans, imgs) {
+    var st = {}; try { st = JSON.parse(ans.formState || '{}'); } catch (e) { st = {}; }
+    var a = {}, i;
+    Object.keys(F).forEach(function (k) { if (F[k].type !== 'image') a[k] = ans[k] || ''; });
+    a.sources = SOURCES.filter(function (o) { return String(ans.sources || '').split(/\s*;\s*/).indexOf(o) !== -1; });
+    var offers = 0; for (i = 1; i <= 3; i++) if (a['o' + i + 'title']) offers = i;
+    S.existing = imgs || {};
+    S.a = a; S.offers = st.offers != null ? Math.min(Math.max(+st.offers || 0, offers), 3) : offers;
+  }
+
+  /* ---------- events ---------- */
+  app.addEventListener('input', function (e) {
+    if (e.target.id === 'aiPaste') { S.aiText = e.target.value; return; }
+    var k = e.target.getAttribute('data-a'); if (!k) return;
+    S.a[k] = e.target.value;
+    var c = app.querySelector('[data-count="' + k + '"]'); if (c) c.textContent = e.target.value.length + ' / ' + F[k].max;
+    saveDraft();
+  });
+  app.addEventListener('change', function (e) {
+    if (e.target.id === 'consent') {
+      S.consent = e.target.checked;
+      if (e.target.checked && S.errors.consent) { delete S.errors.consent; var row = e.target.closest('.field'); if (row) { row.classList.remove('invalid'); var m = row.querySelector('.err'); if (m) m.parentNode.removeChild(m); } }
+      return;
+    }
+    var ck = e.target.getAttribute('data-check');
+    if (ck) { S.a[ck] = e.target.checked ? 'Yes' : ''; if (ck === 'bunsure') delete S.errors.btime; saveDraft(); var y3 = window.pageYOffset; render(false); window.scrollTo(0, y3); return; }
+    var k = e.target.getAttribute('data-image');
+    if (!k || !e.target.files || !e.target.files[0]) return;
+    S.busy++; delete S.errors[k]; render(false);
+    readImage(e.target.files[0], F[k].size || 1400, function (img) { S.images[k] = img; S.busy--; render(false); }, function () { S.busy--; S.errors[k] = 'I couldn\'t open that image. Please try a JPG or PNG.'; render(false); });
+  });
+  app.addEventListener('click', function (e) {
+    var t = e.target.closest ? e.target.closest('button') : null;
+    if (!t) return;
+    if (t.id === 'aiToggle') { S.aiOpen = true; render(false); var bx = app.querySelector('.ai-box'); if (bx) bx.scrollIntoView({ block: 'start' }); return; }
+    if (t.id === 'aiCopy') {
+      copyText(promptText(), function () { S.aiCopied = true; S.aiShowPrompt = false; var y0 = window.pageYOffset; render(false); window.scrollTo(0, y0); },
+        function () { S.aiShowPrompt = true; S.aiNote = 'Copy the prompt from the box above.'; S.aiBad = false; var y1 = window.pageYOffset; render(false); window.scrollTo(0, y1); var pb = document.getElementById('aiPromptBox'); if (pb) { pb.focus(); pb.select(); } });
+      return;
+    }
+    if (t.id === 'aiFill') {
+      var pj = pickJson(S.aiText);
+      if (!pj) { S.aiBad = true; S.aiNote = 'I couldn\'t read that. Paste the whole answer, including the part in curly brackets.'; }
+      else {
+        var got = aiFill(pj); saveDraft();
+        S.aiBad = !got;
+        S.aiNote = got ? 'Done. I filled in ' + got + ' answers. Add your birth details below, then tap Next to check each step and make sure it sounds like you.' : 'That answer was empty. Tell the AI more about your business and try again.';
+      }
+      var y2 = window.pageYOffset; render(false); window.scrollTo(0, y2);
+      return;
+    }
+    var pk = t.getAttribute('data-pick');
+    if (pk) {
+      var f = F[pk], v = t.getAttribute('data-v');
+      if (f.type !== 'multi') S.a[pk] = v;
+      else {
+        var list = Array.isArray(S.a[pk]) ? S.a[pk].slice() : [];
+        var at = list.indexOf(v);
+        if (at !== -1) list.splice(at, 1);
+        else if (f.maxPick && list.length >= f.maxPick) { S.errors[pk] = 'You can pick up to ' + f.maxPick + '. Tap one to unpick it first.'; render(false); return; }
+        else list.push(v);
+        S.a[pk] = list;
+      }
+      delete S.errors[pk];
+      saveDraft();
+      var y = window.pageYOffset; render(false); window.scrollTo(0, y);
+      return;
+    }
+    if (t.id === 'backBtn') { S.aiOpen = false; S.aiNote = ''; S.aiText = ''; S.aiCopied = false; S.errors = {}; S.formError = ''; S.step--; saveDraft(); render(true); return; }
+    if (t.getAttribute('data-add')) { S.offers++; S.confirmRemove = ''; saveDraft(); render(false); return; }
+    var rem = t.getAttribute('data-remove');
+    if (rem) {
+      if (S.confirmRemove !== rem) { S.confirmRemove = rem; render(false); return; }
+      S.confirmRemove = ''; S.errors = {}; removeOffer(+rem.slice(1)); saveDraft(); render(false); return;
+    }
+    var go = t.getAttribute('data-goto');
+    if (go !== null) { S.errors = {}; S.formError = ''; S.step = +go; saveDraft(); render(true); return; }
+    var rp = t.getAttribute('data-replace');
+    if (rp) { var inp = app.querySelector('[data-image="' + rp + '"]'); if (inp) inp.click(); return; }
+    var cl = t.getAttribute('data-clear');
+    if (cl) { if (S.existing[cl]) { S.images[cl] = null; S.existing[cl] = ''; } else delete S.images[cl]; render(false); }
+  });
+  app.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (S.sending || S.busy) return;
+    var errs = validate();
+    if (Object.keys(errs).length) { showErrors(errs); return; }
+    S.errors = {}; S.formError = '';
+    if (S.step === STEPS.length - 1) { submit(); return; }
+    S.aiOpen = false; S.aiNote = ''; S.aiText = ''; S.aiCopied = false; S.confirmRemove = '';
+    S.step++; saveDraft(); render(true);
+  });
+
+  /* ---------- start ---------- */
+  document.getElementById('previewNote').hidden = LIVE;
+  var token = '';
+  try { token = new URLSearchParams(location.search).get('edit') || ''; } catch (e) { token = ''; }
+  if (token && LIVE) {
+    app.innerHTML = '<div class="center-msg">Getting your answers...</div>';
+    fetch(SCRIPT_URL + '?action=load&token=' + encodeURIComponent(token))
+      .then(function (r) { return r.json(); })
+      .then(function (res) { if (!res || !res.ok) throw new Error('nf'); S.token = token; unpack(res.answers || {}, res.images || {}); render(true); })
+      .catch(function () { app.innerHTML = '<div class="center-msg">I couldn\'t find your answers with that link. Please email team@aurailia.com and I\'ll help you.</div>'; });
+  } else {
+    loadDraft();
+    render(false);
+  }
+  window.__auditForm = { unpack: unpack, payload: payload, aiFill: aiFill, S: S };
+})();
+</script>
+</body>
+</html>
