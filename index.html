@@ -225,17 +225,6 @@
           <div class="err">Please add where you were born.</div>
         </div>
 
-        <div class="field">
-          <span class="q">Do you know your Human Design type? <span class="opt">(optional)</span></span>
-          <div class="choices">
-            <label class="choice"><input type="radio" name="Human Design type" value="Generator"> Generator</label>
-            <label class="choice"><input type="radio" name="Human Design type" value="Manifesting Generator"> Manifesting Generator</label>
-            <label class="choice"><input type="radio" name="Human Design type" value="Projector"> Projector</label>
-            <label class="choice"><input type="radio" name="Human Design type" value="Manifestor"> Manifestor</label>
-            <label class="choice"><input type="radio" name="Human Design type" value="Reflector"> Reflector</label>
-            <label class="choice"><input type="radio" name="Human Design type" value="Not sure yet"> Not sure yet</label>
-          </div>
-        </div>
       </section>
 
       <!-- STEP 3 -->
@@ -249,6 +238,13 @@
           <p class="help">List each offer with its price. If you're not selling anything yet, just tell me that.</p>
           <textarea id="offers" name="Current offers and prices" placeholder="Purpose clarity session, $97&#10;6 week group program, $497"></textarea>
           <div class="err">Please tell me what you sell, or that you're not selling yet.</div>
+        </div>
+
+        <div class="field" data-required>
+          <label class="q" for="client">Who's your ideal client? Who do you serve? <span class="req">*</span></label>
+          <p class="help">Tell me about her. Who she is, what she's going through, and what she wants. If you're still figuring this out, tell me who you love working with.</p>
+          <textarea id="client" name="Ideal client"></textarea>
+          <div class="err">Please tell me who you serve.</div>
         </div>
 
         <div class="field" data-required data-group="where">
@@ -269,15 +265,13 @@
         </div>
 
         <div class="field">
-          <label class="q" for="links">Your community or website link <span class="opt">(optional)</span></label>
-          <input type="text" id="links" name="Community or website links" placeholder="Paste one or two links">
+          <label class="q" for="clink">Your community link <span class="opt">(if you have one)</span></label>
+          <input type="url" id="clink" name="Community link" placeholder="https://www.skool.com/your-community" inputmode="url">
         </div>
 
-        <div class="field" data-required>
-          <label class="q" for="hard">What feels hard about charging or selling? <span class="req">*</span></label>
-          <p class="help">Think about the moment your stomach drops when you say your price. Tell me about that.</p>
-          <textarea id="hard" name="What feels hard about selling"></textarea>
-          <div class="err">Please share a little about this one.</div>
+        <div class="field">
+          <label class="q" for="website">Your website <span class="opt">(if you have one)</span></label>
+          <input type="url" id="website" name="Website" placeholder="https://yourwebsite.com" inputmode="url">
         </div>
 
         <div class="field">
@@ -297,8 +291,15 @@
       <!-- STEP 4 -->
       <section class="step" data-name="Your One Goal">
         <h2>Your One Goal</h2>
-        <p class="step-intro">This is what your 30 day plan is built around. Pick one thing. Just one.</p>
+        <p class="step-intro">First, let's dream. Then we'll pick the one thing your 30 day plan is built around.</p>
         <p class="talk-tip">🎙️ Rather talk than type? Tap the mic under any long question and just say it.</p>
+
+        <div class="field" data-required>
+          <label class="q" for="wand">If you had a magic wand, what would your business look like a year from now? <span class="req">*</span></label>
+          <p class="help">Dream big here. What are you selling, who are you working with, how much are you making, and how does your day feel?</p>
+          <textarea id="wand" name="Magic wand business"></textarea>
+          <div class="err">Please share your magic wand business.</div>
+        </div>
 
         <div class="field" data-required data-group="Goal type">
           <span class="q">What kind of goal is it? <span class="req">*</span></span>
@@ -311,6 +312,12 @@
             <label class="choice"><input type="radio" name="Goal type" value="Something else"> Something else</label>
           </div>
           <div class="err">Please pick one.</div>
+        </div>
+
+        <div class="field" data-required id="goalOtherField" hidden>
+          <label class="q" for="goalOther">Tell me what kind of goal it is <span class="req">*</span></label>
+          <input type="text" id="goalOther" name="Goal type other" placeholder="Write a book, start a podcast, host my first retreat">
+          <div class="err">Please tell me what kind of goal it is.</div>
         </div>
 
         <div class="field" data-required>
@@ -338,11 +345,6 @@
           <p class="help">Courses, coaches, posting more, a new offer, a launch. Tell me what you did and how it went. If you haven't tried anything yet, that's okay too.</p>
           <textarea id="tried" name="What she has tried"></textarea>
           <div class="err">Please tell me what you've tried, or that you haven't yet.</div>
-        </div>
-
-        <div class="field">
-          <label class="q" for="why">Why does this one matter to you right now? <span class="opt">(optional)</span></label>
-          <textarea id="why" name="Why it matters now"></textarea>
         </div>
 
         <div class="field" data-required data-group="Hours per week">
@@ -423,6 +425,7 @@
   }
 
   function fieldValid(field){
+    if (field.hidden) return true;
     var group = field.getAttribute("data-group");
     if (group){
       var boxes = field.querySelectorAll('input[name="' + group + '"]');
@@ -471,8 +474,19 @@
     saveDraft();
   });
 
+  // Show the extra box when she picks "Something else"
+  var goalOtherField = document.getElementById("goalOtherField");
+  var goalOther = document.getElementById("goalOther");
+  function syncGoalOther(){
+    var pick = form.querySelector('input[name="Goal type"]:checked');
+    var show = !!(pick && pick.value === "Something else");
+    goalOtherField.hidden = !show;
+    if (!show){ goalOther.value = ""; goalOtherField.classList.remove("invalid"); }
+  }
+
   // Fallback highlight for browsers without :has()
   function syncChecked(){
+    syncGoalOther();
     var labels = form.querySelectorAll(".choice");
     for (var k = 0; k < labels.length; k++){
       var inp = labels[k].querySelector("input");
