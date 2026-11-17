@@ -2,828 +2,654 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wealth &amp; Money Audit | Aurailia</title>
-<meta name="description" content="The form you fill out for your Wealth & Money Audit with Aurailia.">
-<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Your Money Blueprint Audit Map | She Promotes™</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {
-    --plum-deep: #2a1028;
-    --plum: #3d1a3a;
-    --plum-soft: #52264e;
-    --card: rgba(255, 255, 255, 0.06);
-    --card-border: rgba(232, 196, 122, 0.25);
-    --gold: #e8c47a;
-    --gold-bright: #f3d89b;
-    --blush: #f4b6c8;
-    --lavender: #c49bff;
-    --teal: #8fd6cc;
-    --text: #fbeff3;
-    --muted: #d8bfd0;
-    --error: #ffb4b4;
-    --title-grad: linear-gradient(100deg, #c49bff 0%, #e3a6f0 45%, #f4b6c8 100%);
-    --serif: 'Cormorant Garamond', Georgia, serif;
+  :root{
+    --plum:#2a1230;
+    --plum-2:#3a1a42;
+    --plum-3:#4a2453;
+    --gold:#d8b46a;
+    --gold-soft:#e9d3a0;
+    --blush:#f2c4ce;
+    --blush-soft:#f8dfe5;
+    --text:#f7eef2;
+    --muted:#c9b3c4;
+    --error:#ffb3bf;
+    --radius:16px;
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { -webkit-text-size-adjust: 100%; }
-  [hidden] { display: none !important; }
-  body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background-color: var(--plum-deep);
-    background-image: linear-gradient(180deg, var(--plum-soft) 0%, var(--plum) 28%, var(--plum-deep) 100%);
-    background-repeat: no-repeat;
-    color: var(--text);
-    line-height: 1.6;
-    min-height: 100vh;
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    background:var(--plum);
+    background-image:radial-gradient(circle at 15% 0%,rgba(242,196,206,.12),transparent 45%),radial-gradient(circle at 90% 100%,rgba(216,180,106,.10),transparent 50%);
+    background-attachment:fixed;
+    color:var(--text);
+    line-height:1.6;
+    font-size:16px;
+    min-height:100vh;
+    padding:24px 16px 60px;
   }
-  a { color: var(--gold-bright); }
-  button, input, textarea { font-family: inherit; }
-  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, .pick:focus-within { outline: 2px solid var(--gold-bright); outline-offset: 2px; }
-  .grad { background: var(--title-grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: var(--blush); width: fit-content; max-width: 100%; }
+  .wrap{max-width:640px;margin:0 auto}
+  header{text-align:center;margin-bottom:24px}
+  .brand{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:10px}
+  h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:40px;line-height:1.1;color:var(--blush-soft);margin-bottom:12px}
+  .intro{color:var(--muted);font-size:15px;max-width:520px;margin:0 auto}
 
-  .preview-note { background: rgba(232, 196, 122, 0.14); color: var(--gold-bright); font-size: 13px; text-align: center; padding: 8px 16px; }
-  .wrap { width: 100%; max-width: 680px; margin: 0 auto; padding: 0 20px 72px; }
-  .brand { font-family: var(--serif); font-size: 26px; font-weight: 600; text-align: center; padding-top: 28px; margin: 0 auto; }
-  .brand-sub { text-align: center; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-top: 2px; }
+  .progress{margin:28px 0 18px}
+  .progress-top{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-bottom:8px}
+  .progress-top strong{color:var(--gold-soft);font-weight:600}
+  .bar{height:6px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden}
+  .bar span{display:block;height:100%;width:20%;background:linear-gradient(90deg,var(--gold),var(--blush));border-radius:99px;transition:width .35s ease}
 
-  .progress { margin: 26px 0 30px; }
-  .bars { display: grid; gap: 6px; }
-  .bars i { display: block; height: 5px; border-radius: 99px; background: rgba(255, 255, 255, 0.14); }
-  .bars i.on { background: linear-gradient(90deg, var(--gold), var(--blush)); }
-  .progress-label { display: flex; justify-content: space-between; gap: 12px; margin-top: 8px; font-size: 13px; color: var(--muted); }
-
-  .step-title { font-family: var(--serif); font-size: 46px; font-weight: 600; line-height: 1.08; padding-bottom: 3px; outline: none; }
-  .step-sub { margin-top: 10px; font-size: 16px; color: var(--muted); }
-  .form-body { margin-top: 28px; }
-
-  .field { margin-top: 24px; }
-  .field:first-child { margin-top: 0; }
-  .field.tight { margin-top: 10px; }
-  .field label, .field .label { display: block; font-size: 15px; font-weight: 600; }
-  .opt { font-weight: 400; color: var(--muted); font-size: 13px; }
-  .help { font-size: 13.5px; color: var(--muted); margin-top: 3px; }
-  input[type=text], input[type=email], input[type=url], input[type=date], input[type=time], select, textarea {
-    display: block; width: 100%; margin-top: 8px; padding: 13px 15px; min-height: 50px;
-    background: #fff9fb; color: #2a1028; border: 1px solid transparent; border-radius: 12px;
-    font-size: 16px; line-height: 1.5;
+  .card{
+    background:rgba(58,26,66,.75);
+    border:1px solid rgba(216,180,106,.25);
+    border-radius:var(--radius);
+    padding:26px 20px;
+    box-shadow:0 10px 40px rgba(0,0,0,.25);
   }
-  textarea { resize: vertical; min-height: 118px; }
-  textarea.tall { min-height: 200px; }
-  textarea.short { min-height: 84px; }
-  input::placeholder, textarea::placeholder { color: #8d7288; }
-  input[type=date], input[type=time] { -webkit-appearance: none; appearance: none; }
-  .invalid input, .invalid select, .invalid textarea { border-color: var(--error); box-shadow: 0 0 0 1px var(--error); }
-  .err { font-size: 13.5px; color: var(--error); margin-top: 6px; font-weight: 500; }
-  .count { font-size: 12px; color: var(--muted); text-align: right; margin-top: 4px; }
+  .step{display:none}
+  .step.active{display:block;animation:fade .35s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:30px;color:var(--gold-soft);line-height:1.2;margin-bottom:6px}
+  .step-intro{color:var(--muted);font-size:15px;margin-bottom:22px}
 
-  .pick { display: block; margin-top: 8px; border: 1px dashed rgba(232, 196, 122, 0.55); border-radius: 14px; background: var(--card); cursor: pointer; overflow: hidden; position: relative; }
-  .pick input { position: absolute; width: 1px; height: 1px; opacity: 0; }
-  .pick-empty { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 24px 16px; text-align: center; }
-  .pick-empty b { color: var(--gold-bright); font-weight: 600; font-size: 15px; }
-  .pick-empty small { color: var(--muted); font-size: 13px; }
-  .pick-img { display: block; width: 100%; max-height: 260px; object-fit: cover; object-position: top; }
-  .pick-actions { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 6px; }
-  .link-btn { background: none; border: none; color: var(--gold-bright); font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; min-height: 44px; padding: 0; }
+  .field{margin-bottom:22px}
+  label.q,.q{display:block;font-weight:600;font-size:15px;margin-bottom:4px;color:var(--text)}
+  .req{color:var(--blush)}
+  .opt{color:var(--muted);font-weight:400;font-size:13px}
+  .help{font-size:13px;color:var(--muted);margin-bottom:8px}
+  input[type=text],input[type=email],input[type=url],input[type=date],input[type=time],textarea{
+    width:100%;
+    font-family:inherit;
+    font-size:16px;
+    color:var(--text);
+    background:rgba(42,18,48,.85);
+    border:1px solid rgba(201,179,196,.3);
+    border-radius:12px;
+    padding:12px 14px;
+    -webkit-appearance:none;
+    appearance:none;
+    transition:border-color .2s, box-shadow .2s;
+  }
+  input[type=date],input[type=time]{min-height:48px;color-scheme:dark}
+  textarea{min-height:110px;resize:vertical}
+  input:focus,textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(216,180,106,.18)}
+  ::placeholder{color:rgba(201,179,196,.55)}
+  .field.invalid input,.field.invalid textarea{border-color:var(--error)}
+  .err{display:none;color:var(--error);font-size:13px;margin-top:6px}
+  .field.invalid .err{display:block}
 
-  .group { background: var(--card); border: 1px solid var(--card-border); border-radius: 18px; padding: 24px 22px; margin-top: 18px; }
-  .group:first-child { margin-top: 0; }
-  .group-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
-  .group-head h2 { font-family: var(--serif); font-size: 27px; font-weight: 600; color: var(--gold-bright); line-height: 1.15; }
-  .add { width: 100%; margin-top: 16px; }
-  .shots { border-left: 2px solid var(--teal); padding-left: 16px; margin-top: 26px; }
-  .shots-title { font-family: var(--serif); font-size: 24px; font-weight: 600; color: var(--teal); line-height: 1.2; }
+  .choices{display:grid;gap:8px}
+  .choice{
+    display:flex;align-items:flex-start;gap:10px;
+    background:rgba(42,18,48,.6);
+    border:1px solid rgba(201,179,196,.22);
+    border-radius:12px;
+    padding:11px 13px;
+    cursor:pointer;
+    font-size:15px;
+    transition:border-color .2s,background .2s;
+  }
+  .choice input{margin-top:4px;accent-color:var(--gold);width:17px;height:17px;flex-shrink:0}
+  .choice:has(input:checked){border-color:var(--gold);background:rgba(216,180,106,.10)}
+  .choice.checked{border-color:var(--gold);background:rgba(216,180,106,.10)}
+  .inline-check{margin-top:10px}
+  .mic-row{display:flex;align-items:center;gap:10px;margin-top:8px;flex-wrap:wrap}
+  .mic{display:inline-flex;align-items:center;gap:8px;font-size:14px;padding:9px 16px;background:rgba(216,180,106,.12);color:var(--gold-soft);border:1px solid rgba(216,180,106,.45)}
+  .mic svg{width:16px;height:16px;fill:currentColor}
+  .mic.on{background:var(--blush);color:var(--plum);border-color:var(--blush)}
+  .mic.on .dot{display:inline-block}
+  .mic .dot{display:none;width:8px;height:8px;border-radius:50%;background:var(--plum);animation:pulse 1s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  .mic-note{font-size:12px;color:var(--muted)}
+  .talk-tip{display:none;font-size:13px;color:var(--gold-soft);margin:-8px 0 20px}
+  .talk-tip.show{display:block}
+  .why{background:rgba(216,180,106,.08);border:1px solid rgba(216,180,106,.35);border-radius:12px;padding:16px 16px 4px;margin-bottom:24px;font-size:15px}
+  .why p{margin-bottom:12px}
+  .why-title{color:var(--gold-soft);font-weight:600}
 
-  .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 12px 26px; border-radius: 999px; font-size: 15px; font-weight: 600; line-height: 1.25; text-decoration: none; cursor: pointer; border: 1px solid transparent; text-align: center; }
-  .btn:active { transform: scale(0.98); }
-  .btn[disabled] { opacity: 0.6; cursor: wait; }
-  .btn-primary { background: linear-gradient(135deg, var(--gold), var(--blush)); color: var(--plum-deep); }
-  .btn-ghost { background: transparent; color: var(--text); border-color: rgba(216, 191, 208, 0.4); }
-  .nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 34px; }
-  .nav .btn-primary { flex: 1 1 auto; max-width: 340px; margin-left: auto; }
-  .saved-note { text-align: center; font-size: 13px; color: var(--muted); margin-top: 16px; }
-  .form-error { background: rgba(255, 120, 120, 0.13); border: 1px solid rgba(255, 180, 180, 0.5); border-radius: 12px; padding: 12px 14px; font-size: 14.5px; margin-top: 20px; }
+  .nav{display:flex;gap:10px;margin-top:8px}
+  button{
+    font-family:inherit;font-size:16px;font-weight:600;
+    border-radius:99px;padding:14px 22px;cursor:pointer;border:none;
+    -webkit-appearance:none;appearance:none;
+    transition:transform .15s, opacity .2s;
+  }
+  button:active{transform:scale(.98)}
+  .btn-primary{flex:1;background:linear-gradient(90deg,var(--gold),#e8c98a);color:var(--plum)}
+  .btn-ghost{background:transparent;color:var(--muted);border:1px solid rgba(201,179,196,.35)}
+  button[disabled]{opacity:.6;cursor:default}
+  .form-msg{display:none;margin-top:14px;font-size:14px;color:var(--error);text-align:center}
+  .form-msg.show{display:block}
 
-  .ready { background: var(--card); border: 1px solid var(--card-border); border-radius: 16px; padding: 18px 20px; margin-bottom: 26px; font-size: 14.5px; }
-  .ready b { color: var(--gold-bright); }
-  .ready ul { list-style: none; margin-top: 8px; }
-  .ready li { padding-left: 20px; position: relative; margin-top: 4px; }
-  .ready li::before { content: "\2726"; position: absolute; left: 0; color: var(--gold); font-size: 12px; top: 2px; }
-  .ready .buy { margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(232, 196, 122, 0.18); }
+  .done{text-align:center;padding:10px 4px}
+  .done .spark{font-size:34px;color:var(--gold);margin-bottom:6px}
+  .done p{color:var(--muted);margin-bottom:12px}
+  .signoff{font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;color:var(--blush-soft);line-height:1.4;margin-top:18px}
 
-  .rev { background: var(--card); border: 1px solid var(--card-border); border-radius: 16px; padding: 18px 20px; margin-top: 14px; }
-  .rev-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-  .rev-head h2 { font-family: var(--serif); font-size: 25px; font-weight: 600; color: var(--gold-bright); line-height: 1.2; }
-  .rev dl { margin-top: 6px; }
-  .rev dt { font-size: 12.5px; color: var(--blush); font-weight: 600; margin-top: 10px; }
-  .rev dd { font-size: 15px; white-space: pre-line; overflow-wrap: anywhere; }
-  .rev img { display: block; max-width: 180px; max-height: 110px; border-radius: 10px; margin-top: 4px; object-fit: cover; object-position: top; }
-  .rev .none { color: var(--muted); font-size: 14px; margin-top: 8px; }
-  .consent { display: flex; gap: 12px; align-items: flex-start; margin-top: 24px; font-size: 15px; cursor: pointer; font-weight: 400 !important; }
-  .field.tight .consent { margin-top: 0; }
-  .consent input { width: 22px; height: 22px; flex: 0 0 22px; margin-top: 2px; accent-color: var(--gold); }
+  .saved{font-size:12px;color:var(--muted);text-align:center;margin-top:14px;min-height:18px}
+  .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 
-  .done { text-align: center; padding-top: 56px; }
-  .done h1 { font-family: var(--serif); font-size: 54px; font-weight: 600; line-height: 1.06; margin: 0 auto; padding-bottom: 3px; }
-  .done p { margin: 14px auto 0; max-width: 500px; font-size: 16.5px; }
-  .edit-box { max-width: 520px; margin: 24px auto 0; background: var(--card); border: 1px solid var(--card-border); border-radius: 14px; padding: 16px 18px; font-size: 14.5px; }
-  .edit-box code { display: block; margin-top: 8px; font-family: inherit; overflow-wrap: anywhere; color: var(--gold-bright); font-size: 13px; }
-  .signoff { margin-top: 28px !important; color: var(--muted); }
-  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-  .center-msg { text-align: center; padding: 60px 0; color: var(--muted); }
-
-  .opts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-  .opt-btn { border: 1px solid var(--card-border); background: var(--card); color: var(--text); border-radius: 999px; padding: 10px 16px; font-size: 14.5px; min-height: 44px; cursor: pointer; text-align: left; }
-  .opt-btn.on { background: var(--gold); border-color: var(--gold); color: var(--plum-deep); font-weight: 600; }
-  .opts.many .opt-btn { font-size: 13.5px; padding: 8px 13px; min-height: 40px; }
-  .opts.scale { display: grid; grid-template-columns: repeat(10, 1fr); gap: 6px; }
-  .opts.scale .opt-btn { padding: 8px 0; text-align: center; border-radius: 12px; }
-  .scale-ends { display: flex; justify-content: space-between; font-size: 12.5px; color: var(--muted); margin-top: 6px; }
-  .divider-space { height: 22px; }
-
-  .ai-box { position: relative; border: 1px solid rgba(232, 196, 122, 0.45); border-radius: 18px; padding: 20px 22px; margin-bottom: 26px; background: radial-gradient(circle at 100% 0%, rgba(196, 155, 255, 0.18), transparent 60%), radial-gradient(circle at 0% 100%, rgba(143, 214, 204, 0.12), transparent 55%), var(--card); }
-  .ai-box h2 { font-family: var(--serif); font-size: 26px; font-weight: 600; color: var(--gold-bright); line-height: 1.15; }
-  .ai-box p { font-size: 14.5px; margin-top: 6px; }
-  .ai-box ol { margin: 12px 0 0 20px; font-size: 14.5px; }
-  .ai-box ol li { margin-top: 6px; padding-left: 4px; }
-  .ai-box .ai-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
-  .ai-box .btn { flex: 1 1 180px; }
-  .ai-box textarea { min-height: 120px; font-size: 14px; }
-  .ai-box .ai-note { margin-top: 10px; font-size: 14px; color: var(--gold-bright); }
-  .ai-box .ai-note.bad { color: #ffb3c1; }
-  .ai-prompt { margin-top: 12px; width: 100%; min-height: 160px; font-size: 13px; }
-  .ai-open { margin-top: 12px; }
-  .done-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 26px; }
-  .done-actions .btn { flex: 0 0 auto; text-decoration: none; }
-  .confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; }
-
-  @media (max-width: 600px) {
-    .wrap { padding: 0 16px 56px; }
-    .step-title { font-size: 38px; }
-    .group { padding: 20px 16px; }
-    .done h1 { font-size: 44px; }
-    .nav .btn-primary { max-width: none; }
-    .opts.scale { grid-template-columns: repeat(5, 1fr); }
+  @media (min-width:600px){
+    body{padding:48px 24px 80px}
+    h1{font-size:48px}
+    .card{padding:34px 34px}
   }
 </style>
 </head>
 <body>
-<div class="preview-note" id="previewNote" hidden>Preview only. Answers you send from this page aren't saved yet.</div>
 <div class="wrap">
-  <div class="brand grad">Aurailia</div>
-  <div class="brand-sub">Wealth &amp; Money Audit</div>
-  <div id="app"></div>
+
+  <header>
+    <div class="brand">She Promotes™ VIP</div>
+    <h1>Your Money Blueprint Audit Map</h1>
+    <p class="intro">This is where your Money Blueprint Audit Map and 30 day action plan begin. It takes about 10 minutes. Be honest with me, okay? The more real you are here, the more I can see.</p>
+  </header>
+
+  <div class="progress" id="progress">
+    <div class="progress-top"><span id="stepLabel"><strong>Step 1 of 5</strong></span><span id="stepName">About You</span></div>
+    <div class="bar"><span id="barFill"></span></div>
+  </div>
+
+  <div class="card">
+    <form id="blueprintForm" novalidate>
+      <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
+
+      <!-- STEP 1 -->
+      <section class="step active" data-name="About You">
+        <h2>About You</h2>
+        <p class="step-intro">Let's start simple.</p>
+
+        <div class="field" data-required>
+          <label class="q" for="name">Your name <span class="req">*</span></label>
+          <input type="text" id="name" name="Name" autocomplete="name">
+          <div class="err">Please add your name.</div>
+        </div>
+
+        <div class="field" data-required>
+          <label class="q" for="business">Your business name <span class="req">*</span></label>
+          <input type="text" id="business" name="Business name" autocomplete="organization">
+          <div class="err">Please add your business name.</div>
+        </div>
+
+        <div class="field" data-required>
+          <label class="q" for="skool">Your Skool profile link <span class="req">*</span></label>
+          <p class="help">So I can check you're on the yearly VIP plan.</p>
+          <input type="url" id="skool" name="Skool profile" placeholder="https://www.skool.com/@your-name" inputmode="url">
+          <div class="err">Please add your Skool profile link.</div>
+        </div>
+
+        <div class="field" data-required data-type="email">
+          <label class="q" for="email">Your email <span class="req">*</span></label>
+          <p class="help">This is where I'll send your map and plan. It stays private.</p>
+          <input type="email" id="email" name="email" autocomplete="email" inputmode="email">
+          <div class="err">Please add an email I can reach you at.</div>
+        </div>
+      </section>
+
+      <!-- STEP 2 -->
+      <section class="step" data-name="Your Birth Details">
+        <h2>Your Birth Details</h2>
+        <p class="step-intro">Your Money Blueprint Audit Map is built from your Human Design chart. To pull your chart, I need the date, time and place you were born.</p>
+        <div class="why">
+          <p class="why-title">✦ Why I need this</p>
+          <p>Human Design maps the exact moment and place you were born. It shows how you're designed to make money, sell, communicate and make decisions. That's what your whole map is built on.</p>
+          <p>Your birth time matters most. Even an hour off can change your chart, so check your birth certificate if you can. Okay?</p>
+          <p>Your birth details stay private. I only use them to create your map.</p>
+        </div>
+
+        <div class="field" data-required>
+          <label class="q" for="bdate">Your birth date <span class="req">*</span></label>
+          <input type="date" id="bdate" name="Birth date">
+          <div class="err">Please add your birth date.</div>
+        </div>
+
+        <div class="field" data-required data-unless="timeUnsure">
+          <label class="q" for="btime">Your birth time <span class="req">*</span></label>
+          <p class="help">Your birth certificate usually has it. If you really don't know, give me your best guess and tick the box below.</p>
+          <input type="time" id="btime" name="Birth time">
+          <label class="choice inline-check"><input type="checkbox" id="timeUnsure" name="Birth time unsure" value="Yes, not sure of birth time"> I'm not sure about my birth time</label>
+          <div class="err">Please add your birth time, or tick the box if you're not sure.</div>
+        </div>
+
+        <div class="field" data-required>
+          <label class="q" for="bplace">Where you were born <span class="req">*</span></label>
+          <p class="help">City, state or province, and country.</p>
+          <input type="text" id="bplace" name="Birth place" placeholder="Austin, Texas, USA">
+          <div class="err">Please add where you were born.</div>
+        </div>
+
+        <div class="field">
+          <span class="q">Do you know your Human Design type? <span class="opt">(optional)</span></span>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="Human Design type" value="Generator"> Generator</label>
+            <label class="choice"><input type="radio" name="Human Design type" value="Manifesting Generator"> Manifesting Generator</label>
+            <label class="choice"><input type="radio" name="Human Design type" value="Projector"> Projector</label>
+            <label class="choice"><input type="radio" name="Human Design type" value="Manifestor"> Manifestor</label>
+            <label class="choice"><input type="radio" name="Human Design type" value="Reflector"> Reflector</label>
+            <label class="choice"><input type="radio" name="Human Design type" value="Not sure yet"> Not sure yet</label>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 3 -->
+      <section class="step" data-name="How Money Comes In">
+        <h2>How Money Comes In Now</h2>
+        <p class="step-intro">No judgment here. I just want to see where you are today.</p>
+        <p class="talk-tip">🎙️ Rather talk than type? Tap the mic under any long question and just say it.</p>
+
+        <div class="field" data-required>
+          <label class="q" for="offers">What do you sell right now, and what do you charge? <span class="req">*</span></label>
+          <p class="help">List each offer with its price. If you're not selling anything yet, just tell me that.</p>
+          <textarea id="offers" name="Current offers and prices" placeholder="Purpose clarity session, $97&#10;6 week group program, $497"></textarea>
+          <div class="err">Please tell me what you sell, or that you're not selling yet.</div>
+        </div>
+
+        <div class="field" data-required data-group="where">
+          <span class="q">Where do people usually find you? <span class="req">*</span></span>
+          <p class="help">Tick all that fit.</p>
+          <div class="choices">
+            <label class="choice"><input type="checkbox" name="where" value="My Skool community"> My Skool community</label>
+            <label class="choice"><input type="checkbox" name="where" value="My Facebook group"> My Facebook group</label>
+            <label class="choice"><input type="checkbox" name="where" value="Promo groups"> Promo groups</label>
+            <label class="choice"><input type="checkbox" name="where" value="Instagram"> Instagram</label>
+            <label class="choice"><input type="checkbox" name="where" value="TikTok"> TikTok</label>
+            <label class="choice"><input type="checkbox" name="where" value="YouTube or podcast"> YouTube or podcast</label>
+            <label class="choice"><input type="checkbox" name="where" value="My website"> My website</label>
+            <label class="choice"><input type="checkbox" name="where" value="Word of mouth and referrals"> Word of mouth and referrals</label>
+            <label class="choice"><input type="checkbox" name="where" value="Honestly, not many people find me yet"> Honestly, not many people find me yet</label>
+          </div>
+          <div class="err">Please tick at least one.</div>
+        </div>
+
+        <div class="field">
+          <label class="q" for="links">Your community or website link <span class="opt">(optional)</span></label>
+          <input type="text" id="links" name="Community or website links" placeholder="Paste one or two links">
+        </div>
+
+        <div class="field" data-required>
+          <label class="q" for="hard">What feels hard about charging or selling? <span class="req">*</span></label>
+          <p class="help">Think about the moment your stomach drops when you say your price. Tell me about that.</p>
+          <textarea id="hard" name="What feels hard about selling"></textarea>
+          <div class="err">Please share a little about this one.</div>
+        </div>
+
+        <div class="field">
+          <span class="q">Where does money slip away? <span class="opt">(tick any that sound like you)</span></span>
+          <div class="choices">
+            <label class="choice"><input type="checkbox" name="leaks" value="I undercharge"> I undercharge</label>
+            <label class="choice"><input type="checkbox" name="leaks" value="I give too much away for free"> I give too much away for free</label>
+            <label class="choice"><input type="checkbox" name="leaks" value="I have too many offers"> I have too many offers</label>
+            <label class="choice"><input type="checkbox" name="leaks" value="People say let me think about it and go quiet"> People say "let me think about it" and go quiet</label>
+            <label class="choice"><input type="checkbox" name="leaks" value="I don't follow up"> I don't follow up</label>
+            <label class="choice"><input type="checkbox" name="leaks" value="I buy courses and tools I don't use"> I buy courses and tools I don't use</label>
+            <label class="choice"><input type="checkbox" name="leaks" value="I start things and don't finish them"> I start things and don't finish them</label>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 4 -->
+      <section class="step" data-name="Your One Goal">
+        <h2>Your One Goal</h2>
+        <p class="step-intro">This is what your 30 day plan is built around. Pick one thing. Just one.</p>
+        <p class="talk-tip">🎙️ Rather talk than type? Tap the mic under any long question and just say it.</p>
+
+        <div class="field" data-required data-group="Goal type">
+          <span class="q">What kind of goal is it? <span class="req">*</span></span>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="Goal type" value="Launch a new offer"> Launch a new offer</label>
+            <label class="choice"><input type="radio" name="Goal type" value="Fill a program or group"> Fill a program or group</label>
+            <label class="choice"><input type="radio" name="Goal type" value="Book 1:1 clients"> Book 1:1 clients</label>
+            <label class="choice"><input type="radio" name="Goal type" value="Grow my community"> Grow my community</label>
+            <label class="choice"><input type="radio" name="Goal type" value="Raise my prices"> Raise my prices</label>
+            <label class="choice"><input type="radio" name="Goal type" value="Something else"> Something else</label>
+          </div>
+          <div class="err">Please pick one.</div>
+        </div>
+
+        <div class="field" data-required>
+          <label class="q" for="goal">What's the one thing you want to make happen in the next 30 days? <span class="req">*</span></label>
+          <textarea id="goal" name="The one goal"></textarea>
+          <div class="err">Please tell me your one goal.</div>
+        </div>
+
+        <div class="field" data-required>
+          <label class="q" for="done">What does done look like? <span class="req">*</span></label>
+          <p class="help">Make it something you can see. Like "5 people in my group program" or "my new offer page is live and I've shared it 10 times."</p>
+          <textarea id="done" name="What done looks like"></textarea>
+          <div class="err">Please tell me what done looks like.</div>
+        </div>
+
+        <div class="field" data-required>
+          <label class="q" for="holding">What do you think is holding you back? <span class="req">*</span></label>
+          <p class="help">There's no wrong answer. It could be time, fear, money, not knowing where to start, or something deeper.</p>
+          <textarea id="holding" name="What is holding her back"></textarea>
+          <div class="err">Please share what you think is holding you back.</div>
+        </div>
+
+        <div class="field" data-required>
+          <label class="q" for="tried">What have you tried so far? <span class="req">*</span></label>
+          <p class="help">Courses, coaches, posting more, a new offer, a launch. Tell me what you did and how it went. If you haven't tried anything yet, that's okay too.</p>
+          <textarea id="tried" name="What she has tried"></textarea>
+          <div class="err">Please tell me what you've tried, or that you haven't yet.</div>
+        </div>
+
+        <div class="field">
+          <label class="q" for="why">Why does this one matter to you right now? <span class="opt">(optional)</span></label>
+          <textarea id="why" name="Why it matters now"></textarea>
+        </div>
+
+        <div class="field" data-required data-group="Hours per week">
+          <span class="q">How many hours a week can you really give this? <span class="req">*</span></span>
+          <p class="help">Be real with yourself. I'd rather build a plan you'll actually follow.</p>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="Hours per week" value="1 to 3 hours"> 1 to 3 hours</label>
+            <label class="choice"><input type="radio" name="Hours per week" value="4 to 6 hours"> 4 to 6 hours</label>
+            <label class="choice"><input type="radio" name="Hours per week" value="7 to 10 hours"> 7 to 10 hours</label>
+            <label class="choice"><input type="radio" name="Hours per week" value="More than 10 hours"> More than 10 hours</label>
+          </div>
+          <div class="err">Please pick one.</div>
+        </div>
+      </section>
+
+      <!-- STEP 5 -->
+      <section class="step" data-name="Anything Else">
+        <h2>Anything Else</h2>
+        <p class="step-intro">Almost done.</p>
+        <p class="talk-tip">🎙️ Rather talk than type? Tap the mic under any long question and just say it.</p>
+
+        <div class="field">
+          <label class="q" for="extra">Anything else you want me to know? <span class="opt">(optional)</span></label>
+          <textarea id="extra" name="Anything else"></textarea>
+        </div>
+
+        <div class="field" data-required data-group="VIP confirm">
+          <label class="choice"><input type="checkbox" name="VIP confirm" value="Yes, on the yearly VIP plan"> I'm on the yearly VIP plan in She Promotes™ <span class="req">*</span></label>
+          <div class="err">Please confirm you're on the yearly VIP plan.</div>
+        </div>
+      </section>
+
+      <div class="nav" id="nav">
+        <button type="button" class="btn-ghost" id="backBtn">Back</button>
+        <button type="button" class="btn-primary" id="nextBtn">Next</button>
+      </div>
+      <p class="form-msg" id="formMsg"></p>
+    </form>
+
+    <div class="done" id="doneScreen" hidden>
+      <div class="spark">✦</div>
+      <h2>Got it!</h2>
+      <p>I'll start working on your Money Blueprint Audit Map and your 30 day plan. When it's ready, it'll come to the email you gave me. Check your inbox for a confirmation from me in the meantime.</p>
+      <p>If I need anything else, I'll reach out.</p>
+      <div class="signoff">I believe in you. To living our dreams.<br>Aurailia ✦</div>
+    </div>
+  </div>
+
+  <p class="saved" id="savedNote"></p>
 </div>
 
 <script>
-(function () {
-  'use strict';
+(function(){
+  // Paste your Apps Script web app URL here (it ends in /exec)
+  var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzJrMT0uan4hdI9H_syadjV_bGYTSeza6GHHk43jcxemU0rXOtionoti8GhIFv3yHgj/exec";
+  var STORE_KEY = "sp_money_blueprint_draft";
 
-  /* Paste the Google script's web app URL here after setup. */
-  var SCRIPT_URL = '';
-  var LIVE = /^https:\/\/script\.google\.com\//.test(SCRIPT_URL);
-  var DRAFT_KEY = 'aurailiaWealthAuditDraft';
-  var BUY_URL = 'https://www.skool.com/embody-wealth/classroom/25192f82?md=08b1bca27c1b4ebea677b5ee2a15492b';
-  var EW_URL = 'https://www.skool.com/embody-wealth';
-  var SP_URL = 'https://www.skool.com/she-promotes-7924';
+  var form = document.getElementById("blueprintForm");
+  var steps = Array.prototype.slice.call(form.querySelectorAll(".step"));
+  var backBtn = document.getElementById("backBtn");
+  var nextBtn = document.getElementById("nextBtn");
+  var barFill = document.getElementById("barFill");
+  var stepLabel = document.getElementById("stepLabel");
+  var stepName = document.getElementById("stepName");
+  var formMsg = document.getElementById("formMsg");
+  var savedNote = document.getElementById("savedNote");
+  var current = 0;
 
-  var HOW_BUY = 'I bought it in Embody Wealth';
-  var HOW_EW = 'I\'m a yearly Premium member of Embody Wealth';
-  var HOW_SP = 'I\'m a yearly VIP member of She Promotes';
-  var ELIST = ['No', 'Under 100', '100 to 500', 'Over 500'];
-  var INCOME = ['Under $1,000', '$1,000 to $3,000', '$3,000 to $5,000', '$5,000 to $10,000', 'Over $10,000'];
-  var SOURCES = ['Referrals', 'Instagram', 'Facebook', 'TikTok', 'YouTube', 'LinkedIn', 'My Skool community', 'Other Skool communities', 'My email list', 'Networking or events', 'Podcasts or guest spots', 'Paid ads', 'I\'m not sure yet'];
-  var ACCESS = ['Free', 'Paid', 'Free with a paid upgrade'];
-  var MEMBERS = ['Under 50', '50 to 200', '200 to 500', '500 to 1,000', 'Over 1,000'];
-  var ACTIVE = ['Just a few', 'About a quarter', 'About half', 'Most of them'];
-  var PATH = ['Yes, there\'s a clear path', 'Sort of', 'Not yet'];
-  var SCALE = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
-  var HOURS = ['Under 5', '5 to 10', '10 to 20', 'Over 20'];
-
-  var paidCommunity = function () { return val('caccess') === 'Paid' || val('caccess') === 'Free with a paid upgrade'; };
-  var bought = function () { return val('how') === HOW_BUY; };
-
-  /* ---------- the questions ---------- */
-  var F = {
-    how: { label: 'How are you getting your audit?', type: 'choice', required: true, options: [HOW_BUY, HOW_EW, HOW_SP] },
-    skool: { label: 'Your Skool profile link', type: 'url', required: true, ph: 'https://www.skool.com/@your-name', help: function () { return bought() ? 'So I can find your purchase.' : has('how') ? 'So I can confirm your membership.' : 'So I can find your purchase or confirm your membership.'; } },
-    name: { label: 'Your name', required: true, auto: 'name' },
-    email: { label: 'Your email', type: 'email', required: true, auto: 'email', help: 'Private. I\'ll only use it for your audit.' },
-    business: { label: 'Your business name', optional: true },
-    bdate: { label: 'Your birth date', type: 'date', required: true },
-    btime: { label: 'Your birth time', type: 'time', required: function () { return val('bunsure') !== 'Yes'; }, help: 'Check your birth certificate, or ask your mom. Even a close guess helps.' },
-    bunsure: { label: 'I\'m not sure of my time', type: 'check', tight: true },
-    bplace: { label: 'Where were you born?', required: true, ph: 'City, state or region, country', help: 'City and country is perfect.' },
-
-    website: { label: 'Your website', type: 'url', optional: true, ph: 'yourwebsite.com' },
-    offerlink: { label: 'Link to your main offer or sales page', type: 'url', optional: true, ph: 'yourwebsite.com/work-with-me' },
-    social: { label: 'Instagram', type: 'url', optional: true, ph: '@yourname or link', base: 'https://www.instagram.com/', help: 'Add the ones you use. Skip the rest.' },
-    sfacebook: { label: 'Facebook', type: 'url', optional: true, ph: '@yourname or link', base: 'https://www.facebook.com/' },
-    stiktok: { label: 'TikTok', type: 'url', optional: true, ph: '@yourname or link', base: 'https://www.tiktok.com/@' },
-    syoutube: { label: 'YouTube', type: 'url', optional: true, ph: '@yourname or link', base: 'https://www.youtube.com/@' },
-    slinkedin: { label: 'LinkedIn', type: 'url', optional: true, ph: '@yourname or link', base: 'https://www.linkedin.com/in/' },
-    spinterest: { label: 'Pinterest', type: 'url', optional: true, ph: '@yourname or link', base: 'https://www.pinterest.com/' },
-    elist: { label: 'Do you have an email list?', type: 'choice', optional: true, options: ELIST },
-
-    income: { label: 'About how much does your business bring in each month?', type: 'choice', required: true, options: INCOME, help: 'Think of the last 3 months.' },
-    sources: { label: 'Where do most of your clients come from?', type: 'multi', optional: true, options: SOURCES, maxPick: 3, help: 'Pick up to 3.' },
-    journey: { label: 'How does someone go from finding you to paying you?', type: 'textarea', optional: true, help: 'Walk me through it, step by step. Easier to talk it out? Tap the microphone on your keyboard.', ph: 'They find my birth chart reels on Instagram, tap the link in my bio, join my free community, come to a live reading, then book a session.' },
-    stuck: { label: 'What feels stuck?', type: 'textarea', required: true },
-
-    cname: { label: 'Community name', gr: true },
-    clink: { label: 'Link to your community', type: 'url', gr: true, ph: 'https://www.skool.com/your-community/about' },
-    caccess: { label: 'Free or paid?', type: 'choice', options: ACCESS, gr: true },
-    ccost: { label: 'What does it cost?', optional: true, ph: '$9 a month, or $90 a year', showIf: paidCommunity },
-    cmembers: { label: 'How many members do you have?', type: 'choice', optional: true, options: MEMBERS },
-    cactive: { label: 'How many show up in a normal week?', type: 'choice', optional: true, options: ACTIVE, help: 'Posting, commenting or coming to lives.' },
-    cpath: { label: 'Does your community lead people to your paid offers?', type: 'choice', optional: true, options: PATH },
-    cheavy: { label: 'What feels heavy to keep up?', type: 'textarea', short: true, optional: true },
-    cshot1: { label: 'Screenshot 1', type: 'image', optional: true, size: 1800, showIf: paidCommunity },
-    cshot2: { label: 'Screenshot 2', type: 'image', optional: true, size: 1800, showIf: paidCommunity },
-    cshot3: { label: 'Screenshot 3', type: 'image', optional: true, size: 1800, showIf: paidCommunity },
-    cinvite: { label: 'Rather invite me in?', type: 'choice', optional: true, options: ['Yes, I\'ll invite you', 'No, the screenshots are enough'], showIf: paidCommunity },
-
-    mprice: { label: 'When you tell someone your price, what happens in you?', type: 'textarea', required: true, help: 'In your body, in your head, in what you say next.' },
-    mseen: { label: 'What stops you from showing up more?', type: 'textarea', required: true },
-    mreceive: { label: 'How easy is it for you to receive money, from 1 to 10?', type: 'scale', required: true, options: SCALE },
-
-    wand: { label: 'If you had a magic wand and could have your ideal business, what would it look like?', type: 'textarea', tall: true, required: true, help: 'Your days, your clients, your money, how it feels. Dream big here. Easier to talk it out? Tap the microphone on your keyboard.' },
-    change: { label: 'What do you most want to change in the next 90 days?', type: 'textarea', required: true },
-    hours: { label: 'How many hours a week can you give your business?', type: 'choice', required: true, options: HOURS }
-  };
-  var n;
-  for (n = 1; n <= 3; n++) {
-    F['o' + n + 'title'] = { label: 'Offer name', gr: true, ph: 'Birth Chart Reading' };
-    F['o' + n + 'price'] = { label: 'Price', gr: true, ph: '$150, or $47 a month' };
-    F['o' + n + 'link'] = { label: 'Link', type: 'url', optional: true, ph: 'yourwebsite.com/reading' };
-    F['o' + n + 'sold'] = { label: 'About how many did you sell in the last 90 days?', optional: true, help: 'A rough number is fine.', ph: '6' };
+  function showStep(i){
+    steps.forEach(function(s, idx){ s.classList.toggle("active", idx === i); });
+    current = i;
+    backBtn.style.display = i === 0 ? "none" : "";
+    nextBtn.textContent = i === steps.length - 1 ? "Send it to Aurailia" : "Next";
+    barFill.style.width = ((i + 1) / steps.length * 100) + "%";
+    stepLabel.innerHTML = "<strong>Step " + (i + 1) + " of " + steps.length + "</strong>";
+    stepName.textContent = steps[i].getAttribute("data-name");
+    formMsg.classList.remove("show");
   }
-  var OFFER_SFX = ['title', 'price', 'link', 'sold'];
-  var IMAGE_KEYS = ['cshot1', 'cshot2', 'cshot3'];
-  var URL_KEYS = ['skool', 'website', 'offerlink', 'social', 'sfacebook', 'stiktok', 'syoutube', 'slinkedin', 'spinterest', 'clink', 'o1link', 'o2link', 'o3link'];
 
-  var STEPS = [
-    { id: 'you', nav: 'You', title: 'Let\'s start with you', sub: 'This is how I pull your Human Design chart and get to know you.', keys: ['how', 'skool', 'name', 'email', 'business', 'bdate', 'btime', 'bunsure', 'bplace'] },
-    { id: 'find', nav: 'Where to find you', title: 'Where can I find you?', sub: 'I\'ll look at all of this for your audit. Add the ones you use and skip the rest.', keys: ['website', 'offerlink', 'social', 'sfacebook', 'stiktok', 'syoutube', 'slinkedin', 'spinterest', 'elist'] },
-    { id: 'business', nav: 'Your business', title: 'Your business right now', sub: 'Be honest here. This stays between us, and it\'s how I find where money is slipping through.', group: 'o', keys: ['income', 'sources', 'journey', 'stuck'] },
-    { id: 'community', nav: 'Your community', title: 'Your community', sub: 'Tell me about the community you run. No community yet? You can skip this step.', keys: ['cname', 'clink', 'caccess', 'ccost', 'cmembers', 'cactive', 'cpath', 'cheavy', 'cshot1', 'cshot2', 'cshot3', 'cinvite'] },
-    { id: 'money', nav: 'Money', title: 'Money and being seen', sub: 'No right answers here. Write it the way you\'d say it to a friend.', keys: ['mprice', 'mseen', 'mreceive'] },
-    { id: 'future', nav: 'Your 90 days', title: 'Your next 90 days', sub: 'Dream first. Then we get specific.', keys: ['wand', 'change', 'hours'] },
-    { id: 'review', nav: 'Review', title: 'Take one last look', sub: 'Make sure it sounds like you, then send it to me.' }
-  ];
-
-  var app = document.getElementById('app');
-  var S = { step: 0, a: {}, images: {}, existing: {}, offers: 1, consent: false, token: '', errors: {}, sending: false, formError: '', busy: 0, confirmRemove: '' };
-
-  /* ---------- helpers ---------- */
-  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
-  function val(k) { var v = S.a[k]; return Array.isArray(v) ? v : String(v == null ? '' : v); }
-  function has(k) { var v = val(k); return Array.isArray(v) ? v.length > 0 : v.trim() !== ''; }
-  function isReq(f) { return typeof f.required === 'function' ? f.required() : !!f.required; }
-  function byEmail() { return val('how') === HOW_SP; }
-  function cur() { return STEPS[Math.min(S.step, STEPS.length - 1)]; }
-  function shown(k) { var f = F[k]; return !f.showIf || f.showIf(); }
-  function imgSrc(k) {
-    if (S.images[k] && S.images[k].preview) return S.images[k].preview;
-    if (S.images[k] === null) return '';
-    var u = S.existing[k] || '';
-    var m = u.match(/\/d\/([\w-]{10,})/);
-    return m ? 'https://lh3.googleusercontent.com/d/' + m[1] + '=w600' : u;
-  }
-  function normUrl(k) {
-    var f = F[k], v = String(val(k)).trim();
-    if (!v || !f || f.type !== 'url') return;
-    if (f.base && /^@?[\w.]+$/.test(v) && (v.charAt(0) === '@' || v.indexOf('.') === -1)) v = f.base + v.replace(/^@/, '');
-    else if (k === 'skool' && /^@[\w.-]+$/.test(v)) v = 'https://www.skool.com/' + v;
-    else if (!/^https?:\/\//i.test(v)) v = 'https://' + v.replace(/^\/+/, '');
-    S.a[k] = v;
-  }
-  function todayStr() { var d = new Date(); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
-  function okUrl(v) { return /^https?:\/\/[^\s/]+\.[^\s]+$/i.test(v); }
-  function saveDraft() { if (S.token) return; try { localStorage.setItem(DRAFT_KEY, JSON.stringify({ a: S.a, offers: S.offers, step: S.step })); } catch (e) { /* fine */ } }
-  function loadDraft() {
-    try {
-      var d = JSON.parse(localStorage.getItem(DRAFT_KEY) || 'null');
-      if (d && d.a) { S.a = d.a; S.offers = Math.min(Math.max(d.offers == null ? 1 : d.offers, 0), 3); S.step = Math.min(Math.max(0, d.step || 0), STEPS.length - 1); }
-    } catch (e) { /* fresh start */ }
-  }
-  function clearDraft() { try { localStorage.removeItem(DRAFT_KEY); } catch (e) { /* fine */ } }
-
-  /* ---------- drawing a question ---------- */
-  function fieldHtml(k) {
-    var f = F[k];
-    if (!shown(k)) return '';
-    var err = S.errors[k];
-    var helpTxt = typeof f.help === 'function' ? f.help() : f.help;
-    var lab = esc(f.label) + (f.optional ? ' <span class="opt">(optional)</span>' : '');
-    var help = helpTxt ? '<div class="help" id="' + k + '-h">' + esc(helpTxt) + '</div>' : '';
-    var errH = err ? '<div class="err" id="' + k + '-e">' + esc(err) + '</div>' : '';
-    var h = '<div class="field' + (f.tight ? ' tight' : '') + (err ? ' invalid' : '') + '" data-field="' + k + '">';
-    if (f.type === 'check') {
-      return h + '<label class="consent"><input type="checkbox" data-check="' + k + '"' + (val(k) === 'Yes' ? ' checked' : '') + '><span>' + esc(f.label) + '</span></label>' + errH + '</div>';
+  function fieldValid(field){
+    var group = field.getAttribute("data-group");
+    if (group){
+      var boxes = field.querySelectorAll('input[name="' + group + '"]');
+      for (var k = 0; k < boxes.length; k++){ if (boxes[k].checked) return true; }
+      return false;
     }
-    if (f.type === 'image') {
-      var src = imgSrc(k);
-      h += '<div class="label">' + lab + '</div>' + help;
-      h += '<label class="pick"><input type="file" accept="image/*" data-image="' + k + '" aria-label="' + esc(f.label) + '">';
-      h += src ? '<img class="pick-img" src="' + esc(src) + '" alt="">' : '<span class="pick-empty"><b>Choose a screenshot</b><small>JPG or PNG</small></span>';
-      h += '</label>';
-      if (src) h += '<div class="pick-actions"><button type="button" class="link-btn" data-replace="' + k + '">Choose a different one</button><button type="button" class="link-btn" data-clear="' + k + '">Remove</button></div>';
-      return h + errH + '</div>';
+    var unless = field.getAttribute("data-unless");
+    if (unless){
+      var u = document.getElementById(unless);
+      if (u && u.checked) return true;
     }
-    if (f.type === 'choice' || f.type === 'multi' || f.type === 'scale') {
-      var cur2 = f.type === 'multi' ? (Array.isArray(val(k)) ? val(k) : []) : [val(k)];
-      h += '<div class="label" id="' + k + '-l">' + lab + '</div>' + help;
-      h += '<div class="opts' + (f.type === 'scale' ? ' scale' : f.type === 'multi' && f.options.length > 8 ? ' many' : '') + '" role="group" aria-labelledby="' + k + '-l">';
-      f.options.forEach(function (o) {
-        var on = cur2.indexOf(o) !== -1;
-        h += '<button type="button" class="opt-btn' + (on ? ' on' : '') + '" aria-pressed="' + on + '" data-pick="' + k + '" data-v="' + esc(o) + '">' + esc(o) + '</button>';
-      });
-      h += '</div>';
-      if (f.type === 'scale') h += '<div class="scale-ends"><span>1 = it feels hard</span><span>10 = it flows in easily</span></div>';
-      return h + errH + '</div>';
+    var input = field.querySelector("input:not([type=checkbox]):not([type=radio]), textarea");
+    if (!input) return true;
+    var val = (input.value || "").trim();
+    if (!val) return false;
+    if (field.getAttribute("data-type") === "email"){
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
     }
-    h += '<label for="' + k + '">' + lab + '</label>' + help;
-    if (f.type === 'date' || f.type === 'time') return h + '<input type="' + f.type + '" id="' + k + '" data-a="' + k + '" value="' + esc(val(k)) + '"' + (f.type === 'date' ? ' max="' + todayStr() + '"' : '') + (err ? ' aria-invalid="true"' : '') + '>' + errH + '</div>';
-    var attrs = ' id="' + k + '" data-a="' + k + '"' + (f.ph ? ' placeholder="' + esc(f.ph) + '"' : '') + (f.max ? ' maxlength="' + f.max + '"' : '') + (f.auto ? ' autocomplete="' + f.auto + '"' : '') + (err ? ' aria-invalid="true" aria-describedby="' + k + '-e"' : '');
-    if (f.type === 'textarea') h += '<textarea' + (f.tall ? ' class="tall"' : f.short ? ' class="short"' : '') + attrs + '>' + esc(val(k)) + '</textarea>';
-    else h += '<input type="' + (f.type === 'email' ? 'email' : 'text') + '"' + (f.type === 'url' ? ' inputmode="url" autocapitalize="off" autocorrect="off" spellcheck="false"' : '') + attrs + ' value="' + esc(val(k)) + '">';
-    if (f.max) h += '<div class="count" data-count="' + k + '">' + String(val(k)).length + ' / ' + f.max + '</div>';
-    return h + errH + '</div>';
+    return true;
   }
-  function offersHtml() {
-    var h = '';
-    for (var i = 1; i <= S.offers; i++) {
-      h += '<div class="group"><div class="group-head"><h2>' + (i === 1 ? 'Your main offer' : 'Offer ' + i) + '</h2>';
-      h += '<button type="button" class="link-btn" data-remove="o' + i + '">' + (S.confirmRemove === 'o' + i ? 'Tap again to remove' : 'Remove') + '</button></div>';
-      OFFER_SFX.forEach(function (s) { h += fieldHtml('o' + i + s); });
-      h += '</div>';
+
+  function validateStep(i){
+    var fields = steps[i].querySelectorAll(".field[data-required]");
+    var firstBad = null;
+    for (var k = 0; k < fields.length; k++){
+      var ok = fieldValid(fields[k]);
+      fields[k].classList.toggle("invalid", !ok);
+      if (!ok && !firstBad) firstBad = fields[k];
     }
-    if (S.offers < 3) h += '<button type="button" class="btn btn-ghost add" data-add="o">' + (S.offers ? 'Add another offer' : 'Add an offer') + '</button>';
-    return h;
-  }
-  function communityHtml() {
-    var h = '';
-    STEPS[3].keys.forEach(function (k) {
-      if (k === 'cshot1' && paidCommunity()) h += '<div class="shots"><div class="shots-title">Help me peek inside</div><p class="help">I can\'t see inside a paid community. Add up to 3 screenshots, like your About page, your Classroom and a post or two. Or invite me in.</p>';
-      h += fieldHtml(k);
-      if (k === 'cinvite' && paidCommunity()) h += '</div>';
-    });
-    return h;
-  }
-
-  /* ---------- review ---------- */
-  function shownVal(k) {
-    var f = F[k], v = val(k);
-    if (!shown(k)) return '';
-    if (f.type === 'image') { var s = imgSrc(k); return s ? '<img src="' + esc(s) + '" alt="">' : ''; }
-    if (f.type === 'check') return v === 'Yes' ? 'Yes' : '';
-    if (Array.isArray(v)) return v.length ? esc(v.join(', ')) : '';
-    if (f.type === 'date' && /^\d{4}-\d{2}-\d{2}$/.test(v)) { var dp = v.split('-'); try { return esc(new Date(+dp[0], +dp[1] - 1, +dp[2]).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })); } catch (e) { return esc(v); } }
-    if (f.type === 'time' && /^\d{1,2}:\d{2}/.test(v)) { var hh = +v.split(':')[0], mm = v.split(':')[1].slice(0, 2); return esc(((hh % 12) || 12) + ':' + mm + (hh < 12 ? ' AM' : ' PM')); }
-    return String(v).trim() ? esc(String(v).trim()) : '';
-  }
-  function revCard(idx, title, keys) {
-    var rows = keys.map(function (k) { var v = shownVal(k); return v ? '<dt>' + esc(F[k].label) + '</dt><dd>' + v + '</dd>' : ''; }).join('');
-    return '<div class="rev"><div class="rev-head"><h2>' + esc(title) + '</h2><button type="button" class="link-btn" data-goto="' + idx + '">Edit</button></div>' + (rows ? '<dl>' + rows + '</dl>' : '<p class="none">Nothing added.</p>') + '</div>';
-  }
-  function consentText() {
-    var who = val('how') === HOW_SP ? 'I\'m a yearly VIP member of She Promotes™' : val('how') === HOW_EW ? 'I\'m a yearly Premium member of Embody Wealth' : 'I bought my Wealth & Money Audit in Embody Wealth';
-    return who + ', and everything I shared is true to the best of my knowledge.';
-  }
-  function reviewHtml() {
-    var o = [];
-    for (var i = 1; i <= S.offers; i++) OFFER_SFX.forEach(function (s) { o.push('o' + i + s); });
-    var h = revCard(0, 'You', STEPS[0].keys) + revCard(1, 'Where to find you', STEPS[1].keys) + revCard(2, 'Your business', o.concat(STEPS[2].keys));
-    h += revCard(3, 'Your community', STEPS[3].keys) + revCard(4, 'Money and being seen', STEPS[4].keys) + revCard(5, 'Your next 90 days', STEPS[5].keys);
-    h += '<div class="field' + (S.errors.consent ? ' invalid' : '') + '"><label class="consent"><input type="checkbox" id="consent"' + (S.consent ? ' checked' : '') + '><span>' + esc(consentText()) + '</span></label>' + (S.errors.consent ? '<div class="err">' + esc(S.errors.consent) + '</div>' : '') + '</div>';
-    return h;
-  }
-
-  /* ---------- screens ---------- */
-  function render(top) {
-    var st = cur(), i = STEPS.indexOf(st), h = '';
-    S.step = i;
-    h += '<div class="progress"><div class="bars" style="grid-template-columns:repeat(' + STEPS.length + ',1fr)" aria-hidden="true">';
-    STEPS.forEach(function (s, j) { h += '<i class="' + (j <= i ? 'on' : '') + '"></i>'; });
-    h += '</div><div class="progress-label"><span>Step ' + (i + 1) + ' of ' + STEPS.length + '</span><span>' + esc(st.nav) + '</span></div></div>';
-    var title = S.token && i === 0 ? 'Update your answers' : st.title;
-    h += '<h1 class="step-title grad" tabindex="-1" id="stepTitle">' + esc(title) + '</h1>';
-    h += '<p class="step-sub">' + esc(st.sub) + '</p><form class="form-body" id="form" novalidate>';
-    if (i === 0 && !S.token) h += '<div class="ready"><b>This takes about 15 minutes, and your answers save on this device as you go.</b> Have these handy:<ul><li>Your birth date, time and city</li><li>Links to your website, socials and community</li><li>Your offers and what you charge</li></ul><div class="buy">Haven\'t bought your audit yet? It\'s $111 inside Embody Wealth. <a href="' + BUY_URL + '" target="_blank" rel="noopener">Get it here</a>.</div></div>';
-    if (i === 0) h += aiHtml();
-    if (st.id === 'business') { h += offersHtml(); h += '<div class="divider-space"></div>'; st.keys.forEach(function (k) { h += fieldHtml(k); }); }
-    else if (st.id === 'community') h += communityHtml();
-    else if (st.id === 'review') h += reviewHtml();
-    else st.keys.forEach(function (k) { h += fieldHtml(k); });
-    h += '<div class="hp" aria-hidden="true"><label>Leave this empty<input type="text" id="hpField" tabindex="-1" autocomplete="off"></label></div>';
-    if (S.formError) h += '<div class="form-error" role="alert">' + esc(S.formError) + '</div>';
-    var last = i === STEPS.length - 1;
-    var empty = st.id === 'community' && !communityStarted();
-    h += '<div class="nav">' + (i > 0 ? '<button type="button" class="btn btn-ghost" id="backBtn">Back</button>' : '');
-    h += '<button type="submit" class="btn btn-primary" id="nextBtn"' + (S.sending || S.busy ? ' disabled' : '') + '>' + (S.sending ? 'Sending...' : S.busy ? 'Getting your screenshot ready...' : last ? (S.token ? 'Save my changes' : 'Send to Aurailia') : empty ? 'Skip' : 'Next') + '</button></div></form>';
-    if (!S.token) h += '<p class="saved-note">Your answers save on this device as you go. If you leave before sending, you\'ll need to add your screenshots again.</p>';
-    app.innerHTML = h;
-    if (top) { window.scrollTo(0, 0); var t = document.getElementById('stepTitle'); if (t) t.focus({ preventScroll: true }); }
-  }
-  function renderDone(res) {
-    var first = String(val('name')).trim().split(/\s+/)[0];
-    var h = '<div class="done"><h1 class="grad">' + (S.token ? 'Your changes are in' : 'You\'re in' + (first ? ', ' + esc(first) : '')) + '</h1>';
-    if (S.token) h += '<p>Thank you. I\'ll use your updated answers for your audit.</p>';
-    else if (byEmail()) h += '<p>Your answers came through. Within 72 hours, I\'ll read your chart and go through your website, socials and community. Then your audit lands in your inbox. Check spam or promotions if you don\'t see it.</p>';
-    else h += '<p>Your answers came through. Within 72 hours, I\'ll read your chart and go through your website, socials and community. Then I\'ll email you to book your 1:1 call, and we\'ll walk through your audit together.</p>';
-    if (res && res.editLink && !S.token) h += '<div class="edit-box">' + (res.emailed ? 'I emailed you a private link in case you want to add something before I start.' : 'Save this private link in case you want to add something before I start.') + ' Please keep it to yourself, since anyone with it can change your answers.' + (res.emailed ? '' : '<code>' + esc(res.editLink) + '</code>') + '</div>';
-    if (res && res.imageProblems && res.imageProblems.length) h += '<p>One of your screenshots didn\'t save. Please send it to team@aurailia.com.</p>';
-    if (!LIVE) h += '<p>This is the preview, so nothing was saved.</p>';
-    h += '<div class="done-actions"><a class="btn btn-primary" href="' + (byEmail() ? SP_URL : EW_URL) + '">' + (byEmail() ? 'Back to She Promotes' : 'Back to Embody Wealth') + '</a></div>';
-    h += '<p class="signoff">I believe in you. To living our dreams.<br>Aurailia &#10022;</p></div>';
-    app.innerHTML = h; window.scrollTo(0, 0);
-    confetti();
-  }
-
-  /* ---------- Let AI fill it in ---------- */
-  var AI_PROMPT = [
-    'I\'m filling out the form for my Wealth & Money Audit with Aurailia. Please help me fill it in.',
-    '',
-    'Start with what you already know about me from our past chats, your memory of me, or my project files. Add anything I paste below this message, like my website, my Skool about page or my offer pages. Keep my own words where you can. For my links (website, main offer page, Instagram, Facebook, other socials, Skool profile, community link), check my memory, our past chats and my project files. If you can search the web, look them up too. Show me every link you found so I can confirm it. Never make up links, prices, numbers or details. If something isn\'t there, leave it as "".',
-    '',
-    'Some answers have to come from me, not from you. Ask me these one at a time, in this order, and keep my exact words. Fix spelling only. Don\'t write them for me:',
-    '1. When you tell someone your price, what happens in you?',
-    '2. What stops you from showing up more?',
-    '3. How easy is it for you to receive money, from 1 to 10?',
-    '4. If you had a magic wand and could have your ideal business, what would it look like?',
-    '5. What do you most want to change in the next 90 days?',
-    'If you don\'t already know them, also ask me how much my business brings in each month, about how many of each offer I sold in the last 90 days, and how many hours a week I can give my business. Never guess those.',
-    '',
-    'Leave out my birth details and my email. I\'ll type those into the form myself.',
-    '',
-    'Here\'s the code you\'ll fill in at the end. Don\'t send it yet:',
-    '',
-    '{',
-    '  "name": "my full name",',
-    '  "business": "my business name",',
-    '  "skool": "my Skool profile link",',
-    '  "website": "my website link",',
-    '  "offerLink": "link to my main offer or sales page",',
-    '  "socials": { "instagram": "", "facebook": "", "tiktok": "", "youtube": "", "linkedin": "", "pinterest": "" },',
-    '  "emailList": "one from the email list options below",',
-    '  "offers": [ { "title": "offer name", "price": "like $150 or $47 a month", "link": "", "sold": "about how many in the last 90 days" } ],',
-    '  "monthlyIncome": "one from the income options below",',
-    '  "clientSources": ["up to 3 from the client source options below"],',
-    '  "journey": "how someone goes from finding me to paying me, step by step, in my words",',
-    '  "stuck": "what feels stuck, in my words",',
-    '  "community": { "name": "", "link": "", "access": "Free, Paid, or Free with a paid upgrade", "cost": "", "members": "one from the member options below", "weeklyActive": "one from the weekly options below", "leadsToOffers": "one from the path options below", "heavy": "what feels heavy to keep up, in my words" },',
-    '  "price": "my exact words",',
-    '  "seen": "my exact words",',
-    '  "receive": "a number from 1 to 10",',
-    '  "wand": "my exact words",',
-    '  "change": "my exact words",',
-    '  "hours": "one from the hours options below"',
-    '}',
-    '',
-    'Up to 3 offers, my main one first. Leave "community" empty if I don\'t run one.',
-    '',
-    'Email list options: ' + ELIST.join('; ') + '.',
-    'Income options: ' + INCOME.join('; ') + '.',
-    'Client source options: ' + SOURCES.join('; ') + '.',
-    'Member options: ' + MEMBERS.join('; ') + '.',
-    'Weekly options: ' + ACTIVE.join('; ') + '.',
-    'Path options: ' + PATH.join('; ') + '.',
-    'Hours options: ' + HOURS.join('; ') + '.',
-    '',
-    'HOW TO DO THIS',
-    '1. First, show me what you found in plain, easy-to-read words, section by section, like a little summary I can skim. No code yet. Point out anything you\'re not sure about or couldn\'t find.',
-    '2. Then ask me the questions above that need my own words, one at a time. Only ask about other things if you don\'t know enough, and keep those short.',
-    '3. Then ask me: Does this look right? Tell me what to change, or say looks good.',
-    '4. When I say it looks good, send the filled-in code in one code block, nothing else in the block.',
-    '5. Right under the code block, tell me the next step in these words: Tap Copy on the code box above. Go back to the audit form, paste it in the box that says Paste the AI\'s answer here, then tap Fill in my form. Then check each step, change anything that doesn\'t sound like you, add your birth details, and send it.',
-    '',
-    'Anything extra I want you to use (this can be empty):'
-  ].join('\n');
-  /* What she's already filled in goes into the prompt, so the AI keeps it and only fills the gaps */
-  function knownInfo() {
-    var L = [], add = function (label, k) { var v = val(k); v = Array.isArray(v) ? v.join(', ') : String(v).trim(); if (v) L.push(label + ': ' + v); };
-    add('Name', 'name'); add('Business', 'business'); add('Skool profile', 'skool'); add('Website', 'website'); add('Main offer page', 'offerlink');
-    add('Instagram', 'social'); add('Facebook', 'sfacebook'); add('TikTok', 'stiktok'); add('YouTube', 'syoutube'); add('LinkedIn', 'slinkedin'); add('Pinterest', 'spinterest');
-    for (var i = 1; i <= S.offers; i++) { if (has('o' + i + 'title')) L.push('Offer ' + i + ': ' + val('o' + i + 'title') + (has('o' + i + 'price') ? ' (' + val('o' + i + 'price') + ')' : '') + (has('o' + i + 'link') ? ' ' + val('o' + i + 'link') : '')); }
-    if (has('cname')) L.push('My community: ' + val('cname') + (has('clink') ? ' ' + val('clink') : ''));
-    return L.length ? 'WHAT I ALREADY FILLED IN (keep these unless I tell you to change them, and fill in what\'s missing):\n' + L.join('\n') + '\n\n' : '';
-  }
-  function promptText() {
-    var tail = 'Anything extra I want you to use (this can be empty):';
-    return AI_PROMPT.replace(tail, knownInfo() + tail);
-  }
-  function aiHtml() {
-    var h = '<div class="ai-box"><h2>Want AI to fill this in for you?</h2>';
-    h += '<p>Save yourself the typing. Claude or ChatGPT can fill in most of this form with you. Then you click through each step and change anything that doesn\'t sound like you.</p>';
-    if (!S.aiOpen) return h + '<button type="button" class="btn btn-ghost ai-open" id="aiToggle">Show me how</button></div>';
-    h += '<ol><li>Tap <b>Copy the prompt</b>.</li><li>Open a new chat in Claude or ChatGPT and paste it in.</li><li>Under it, paste your website, your Skool about page or your offer pages, or just talk about your business. If it already knows you from past chats, it uses that. Easier to talk? Tap the microphone on your keyboard.</li><li>It shows you what it found, then asks you a few questions only you can answer. Answer in your own words.</li><li>When you say <b>looks good</b>, it gives you a code box. Tap <b>Copy</b> on it, paste it in the box below and tap <b>Fill in my form</b>.</li></ol>';
-    h += '<div class="ai-row"><button type="button" class="btn btn-primary" id="aiCopy">' + (S.aiCopied ? 'Copied. Now open Claude or ChatGPT' : 'Copy the prompt') + '</button></div>';
-    if (S.aiShowPrompt) h += '<textarea class="ai-prompt" id="aiPromptBox" readonly aria-label="The prompt to copy">' + esc(promptText()) + '</textarea>';
-    h += '<div class="field" style="margin:16px 0 0"><label for="aiPaste">Paste the AI\'s answer here</label><textarea id="aiPaste" placeholder="Paste the whole answer, including the part in curly brackets">' + esc(S.aiText || '') + '</textarea></div>';
-    h += '<div class="ai-row"><button type="button" class="btn btn-primary" id="aiFill">Fill in my form</button></div>';
-    if (S.aiNote) h += '<div class="ai-note' + (S.aiBad ? ' bad' : '') + '" role="status">' + esc(S.aiNote) + '</div>';
-    return h + '</div>';
-  }
-  function pickJson(txt) {
-    txt = String(txt || '').replace(/[“”]/g, '"').replace(/[‘’]/g, "'");
-    var fence = txt.match(/```(?:json)?\s*([\s\S]*?)```/i);
-    if (fence) txt = fence[1];
-    var a = txt.indexOf('{'), b = txt.lastIndexOf('}');
-    if (a === -1 || b <= a) return null;
-    try { return JSON.parse(txt.slice(a, b + 1)); } catch (e) { return null; }
-  }
-  function str(x, max) { var v = String(x == null ? '' : x).replace(/\r\n/g, '\n').trim(); return max ? v.slice(0, max) : v; }
-  function arr(x) { return Array.isArray(x) ? x : (x ? String(x).split(/\s*[,;]\s*/) : []); }
-  function known(list, opts, max) {
-    var out = [];
-    arr(list).forEach(function (v) {
-      var k = str(v).toLowerCase(); if (!k) return;
-      var hit = null;
-      opts.forEach(function (o) { if (!hit && o.toLowerCase() === k) hit = o; });
-      if (!hit) opts.forEach(function (o) { if (!hit && (o.toLowerCase().indexOf(k) !== -1 || k.indexOf(o.toLowerCase()) !== -1)) hit = o; });
-      if (hit && out.indexOf(hit) === -1) out.push(hit);
-    });
-    return max ? out.slice(0, max) : out;
-  }
-  function oneOf(v, opts) { var x = str(v); if (!x) return ''; var r = [], lx = x.toLowerCase(); opts.forEach(function (o) { if (o.toLowerCase() === lx) r.push(o); }); return r[0] || ''; }
-  function accessOf(v) {
-    v = str(v).toLowerCase(); if (!v) return '';
-    if (/upgrade|premium|free.*paid|paid.*free/.test(v)) return 'Free with a paid upgrade';
-    if (/^free/.test(v)) return 'Free';
-    return 'Paid';
-  }
-  function aiFill(j) {
-    var n = 0, i;
-    var set = function (k, v) { if (Array.isArray(v) ? v.length : str(v)) { S.a[k] = Array.isArray(v) ? v : str(v, 6000); n++; } };
-    set('name', j.name); set('business', j.business); set('skool', j.skool); set('website', j.website); set('offerlink', j.offerLink || j.offerlink);
-    var so = j.socials || {};
-    set('social', so.instagram || j.instagram); set('sfacebook', so.facebook); set('stiktok', so.tiktok); set('syoutube', so.youtube); set('slinkedin', so.linkedin); set('spinterest', so.pinterest);
-    set('elist', oneOf(j.emailList, ELIST) || known([j.emailList], ELIST, 1)[0]);
-    var offers = (Array.isArray(j.offers) ? j.offers : []).filter(function (o) { return o && str(o.title); }).slice(0, 3);
-    if (offers.length) {
-      for (i = 1; i <= 3; i++) OFFER_SFX.forEach(function (sx) { delete S.a['o' + i + sx]; });
-      offers.forEach(function (o, x) { var p = 'o' + (x + 1); set(p + 'title', o.title); set(p + 'price', o.price); set(p + 'link', o.link); set(p + 'sold', o.sold); });
-      S.offers = offers.length;
+    if (firstBad){
+      firstBad.scrollIntoView({behavior:"smooth", block:"center"});
+      return false;
     }
-    set('income', oneOf(j.monthlyIncome, INCOME));
-    set('sources', known(j.clientSources, SOURCES, 3));
-    set('journey', j.journey); set('stuck', j.stuck);
-    var c = j.community || {};
-    if (str(c.name)) {
-      set('cname', c.name); set('clink', c.link); set('caccess', accessOf(c.access)); set('ccost', c.cost);
-      set('cmembers', oneOf(c.members, MEMBERS)); set('cactive', oneOf(c.weeklyActive, ACTIVE)); set('cpath', known([c.leadsToOffers], PATH, 1)[0]); set('cheavy', c.heavy);
-    }
-    set('mprice', j.price); set('mseen', j.seen);
-    var rc = String(j.receive == null ? '' : j.receive).match(/\d+/); if (rc && +rc[0] >= 1 && +rc[0] <= 10) set('mreceive', String(+rc[0]));
-    set('wand', j.wand); set('change', j.change); set('hours', oneOf(j.hours, HOURS));
-    URL_KEYS.forEach(function (k) { if (has(k)) normUrl(k); });
-    return n;
-  }
-  function copyText(text, ok, fail) {
-    try {
-      if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(ok, fail); return; }
-    } catch (e) { /* fall through */ }
-    fail();
+    return true;
   }
 
-  /* ---------- confetti for the thank you page ---------- */
-  function confetti() {
-    try { if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; } catch (e) { /* fine */ }
-    var cv = document.createElement('canvas'); cv.className = 'confetti'; cv.setAttribute('aria-hidden', 'true');
-    document.body.appendChild(cv);
-    var ctx = cv.getContext && cv.getContext('2d'); if (!ctx) { cv.parentNode.removeChild(cv); return; }
-    var dpr = Math.min(window.devicePixelRatio || 1, 2), W = 0, H = 0;
-    var size = function () { W = window.innerWidth; H = window.innerHeight; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); };
-    size(); window.addEventListener('resize', size);
-    var COLORS = ['#e8c47a', '#f3d89b', '#c9a3ff', '#f4b6c8', '#ffffff', '#8fd6cc', '#7b3fa0'];
-    var bits = [], k;
-    for (k = 0; k < 170; k++) bits.push({
-      x: W / 2 + (Math.random() - 0.5) * W * 0.3, y: H * 0.32 + (Math.random() - 0.5) * 40,
-      vx: (Math.random() - 0.5) * 13, vy: -Math.random() * 13 - 4,
-      w: 6 + Math.random() * 7, h: 4 + Math.random() * 5, r: Math.random() * Math.PI, vr: (Math.random() - 0.5) * 0.3,
-      c: COLORS[k % COLORS.length], round: Math.random() < 0.3, wob: Math.random() * 10
-    });
-    var start = Date.now();
-    var tick = function () {
-      var t = Date.now() - start;
-      ctx.clearRect(0, 0, W, H);
-      var alive = 0;
-      bits.forEach(function (b) {
-        b.vy += 0.26; b.vx *= 0.985; b.vy *= 0.99; b.x += b.vx + Math.sin((t / 260) + b.wob) * 0.6; b.y += b.vy; b.r += b.vr;
-        if (b.y < H + 20) alive++;
-        ctx.save(); ctx.globalAlpha = t > 3600 ? Math.max(0, 1 - (t - 3600) / 900) : 1;
-        ctx.translate(b.x, b.y); ctx.rotate(b.r); ctx.fillStyle = b.c;
-        if (b.round) { ctx.beginPath(); ctx.arc(0, 0, b.h / 2 + 1, 0, Math.PI * 2); ctx.fill(); }
-        else ctx.fillRect(-b.w / 2, -b.h / 2, b.w, b.h * Math.abs(Math.cos(b.r * 2)) + 1);
-        ctx.restore();
-      });
-      if (alive && t < 4500) window.requestAnimationFrame(tick);
-      else { window.removeEventListener('resize', size); if (cv.parentNode) cv.parentNode.removeChild(cv); }
-    };
-    window.requestAnimationFrame(tick);
-  }
-
-  /* ---------- checking answers ---------- */
-  function communityStarted() { return has('cname') || has('clink') || has('caccess'); }
-  function check(k, errs, groupMode) {
-    var f = F[k]; if (!shown(k)) return;
-    var need = isReq(f) || (groupMode && f.gr);
-    if (f.type === 'image' || f.type === 'check') return;
-    if (f.type === 'choice' || f.type === 'multi' || f.type === 'scale') { if (need && !has(k)) errs[k] = 'Please pick one.'; return; }
-    var v = String(val(k)).trim();
-    if (need && !v) { errs[k] = f.type === 'time' ? 'Please add your birth time, or check the box if you\'re not sure.' : 'Please fill this in.'; return; }
-    if (v && f.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) errs[k] = 'That email doesn\'t look right. Mind checking it?';
-    if (v && f.type === 'url') { normUrl(k); if (!okUrl(val(k))) errs[k] = 'That link doesn\'t look right. Mind checking it?'; }
-    if (v && f.type === 'date' && v > todayStr()) errs[k] = 'That date hasn\'t happened yet. Mind checking it?';
-  }
-  function validate() {
-    var st = cur(), errs = {}, i;
-    if (st.id === 'business') {
-      for (i = 1; i <= S.offers; i++) OFFER_SFX.forEach(function (s) { check('o' + i + s, errs, true); });
-      st.keys.forEach(function (k) { check(k, errs, false); });
-    } else if (st.id === 'community') {
-      var started = communityStarted();
-      st.keys.forEach(function (k) { check(k, errs, started); });
-    } else if (st.id === 'review') {
-      if (!S.consent) errs.consent = 'Please check this box so I can start your audit.';
-    } else st.keys.forEach(function (k) { check(k, errs, false); });
-    return errs;
-  }
-  function showErrors(errs) {
-    S.errors = errs; render(false);
-    var k = Object.keys(errs)[0];
-    var box = k === 'consent' ? document.getElementById('consent') : document.querySelector('[data-field="' + k + '"]');
-    if (box) { var inp = box.matches && box.matches('input') ? box : box.querySelector('input, textarea, button'); if (inp) inp.focus({ preventScroll: true }); box.scrollIntoView({ block: 'center' }); }
-  }
-
-  /* ---------- images ---------- */
-  function readImage(file, max, done, fail) {
-    var url = URL.createObjectURL(file), img = new Image();
-    img.onload = function () {
-      try {
-        var sc = Math.min(1, max / Math.max(img.naturalWidth, img.naturalHeight));
-        var w = Math.max(1, Math.round(img.naturalWidth * sc)), hh = Math.max(1, Math.round(img.naturalHeight * sc));
-        var c = document.createElement('canvas'); c.width = w; c.height = hh;
-        var x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, w, hh); x.drawImage(img, 0, 0, w, hh);
-        var d = c.toDataURL('image/jpeg', 0.86); URL.revokeObjectURL(url);
-        done({ preview: d, data: d.split(',')[1], mime: 'image/jpeg' });
-      } catch (e) { URL.revokeObjectURL(url); fail(); }
-    };
-    img.onerror = function () { URL.revokeObjectURL(url); fail(); };
-    img.src = url;
-  }
-
-  /* ---------- removing an offer ---------- */
-  function removeOffer(idx) {
-    for (var i = idx; i <= S.offers; i++) OFFER_SFX.forEach(function (s) {
-      var from = 'o' + (i + 1) + s, to = 'o' + i + s;
-      if (i < S.offers) S.a[to] = S.a[from]; else delete S.a[to];
-    });
-    S.offers--;
-  }
-
-  /* ---------- sending ---------- */
-  function payload() {
-    var A = {}, i;
-    var put = function (k, v) { A[k] = Array.isArray(v) ? v.join('; ') : String(v == null ? '' : v).trim(); };
-    ['how', 'skool', 'name', 'email', 'business', 'bdate', 'btime', 'bunsure', 'bplace'].concat(STEPS[1].keys, STEPS[2].keys, STEPS[4].keys, STEPS[5].keys).forEach(function (k) { put(k, val(k)); });
-    for (i = 1; i <= 3; i++) OFFER_SFX.forEach(function (s) { put('o' + i + s, i <= S.offers ? val('o' + i + s) : ''); });
-    ['cname', 'clink', 'caccess', 'ccost', 'cmembers', 'cactive', 'cpath', 'cheavy', 'cinvite'].forEach(function (k) { put(k, shown(k) ? val(k) : ''); });
-    A.formState = JSON.stringify({ offers: S.offers });
-    return A;
-  }
-  function submit() {
-    S.sending = true; S.formError = ''; render(false);
-    var images = {};
-    IMAGE_KEYS.forEach(function (k) {
-      if (!shown(k)) { if (S.token && S.existing[k]) images[k] = null; return; }
-      if (S.images[k] === null) images[k] = null;
-      else if (S.images[k] && S.images[k].data) images[k] = { data: S.images[k].data, mime: S.images[k].mime };
-    });
-    var hp = document.getElementById('hpField');
-    var body = { answers: payload(), images: images, consent: S.consent === true, token: S.token, hp: hp ? hp.value : '' };
-    if (!LIVE) { S.sending = false; window.__lastPayload = body; clearDraft(); renderDone({ editLink: 'preview', emailed: true }); return; }
-    fetch(SCRIPT_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) })
-      .then(function (r) { return r.json(); })
-      .then(function (res) { S.sending = false; if (!res || !res.ok) throw new Error((res && res.error) || 'failed'); clearDraft(); renderDone(res); })
-      .catch(function () {
-        S.sending = false;
-        S.formError = 'That didn\'t go through, but your answers are still here. Please try again. If it keeps happening, email team@aurailia.com.';
-        render(false); var e = document.querySelector('.form-error'); if (e) e.scrollIntoView({ block: 'center' });
-      });
-  }
-  /* bring saved answers back into the form */
-  function unpack(ans, imgs) {
-    var st = {}; try { st = JSON.parse(ans.formState || '{}'); } catch (e) { st = {}; }
-    var a = {}, i;
-    Object.keys(F).forEach(function (k) { if (F[k].type !== 'image') a[k] = ans[k] || ''; });
-    a.sources = SOURCES.filter(function (o) { return String(ans.sources || '').split(/\s*;\s*/).indexOf(o) !== -1; });
-    var offers = 0; for (i = 1; i <= 3; i++) if (a['o' + i + 'title']) offers = i;
-    S.existing = imgs || {};
-    S.a = a; S.offers = st.offers != null ? Math.min(Math.max(+st.offers || 0, offers), 3) : offers;
-  }
-
-  /* ---------- events ---------- */
-  app.addEventListener('input', function (e) {
-    if (e.target.id === 'aiPaste') { S.aiText = e.target.value; return; }
-    var k = e.target.getAttribute('data-a'); if (!k) return;
-    S.a[k] = e.target.value;
-    var c = app.querySelector('[data-count="' + k + '"]'); if (c) c.textContent = e.target.value.length + ' / ' + F[k].max;
+  form.addEventListener("input", function(e){
+    var f = e.target.closest ? e.target.closest(".field") : null;
+    if (f && f.classList.contains("invalid") && fieldValid(f)) f.classList.remove("invalid");
     saveDraft();
   });
-  app.addEventListener('change', function (e) {
-    if (e.target.id === 'consent') {
-      S.consent = e.target.checked;
-      if (e.target.checked && S.errors.consent) { delete S.errors.consent; var row = e.target.closest('.field'); if (row) { row.classList.remove('invalid'); var m = row.querySelector('.err'); if (m) m.parentNode.removeChild(m); } }
-      return;
-    }
-    var ck = e.target.getAttribute('data-check');
-    if (ck) { S.a[ck] = e.target.checked ? 'Yes' : ''; if (ck === 'bunsure') delete S.errors.btime; saveDraft(); var y3 = window.pageYOffset; render(false); window.scrollTo(0, y3); return; }
-    var k = e.target.getAttribute('data-image');
-    if (!k || !e.target.files || !e.target.files[0]) return;
-    S.busy++; delete S.errors[k]; render(false);
-    readImage(e.target.files[0], F[k].size || 1400, function (img) { S.images[k] = img; S.busy--; render(false); }, function () { S.busy--; S.errors[k] = 'I couldn\'t open that image. Please try a JPG or PNG.'; render(false); });
-  });
-  app.addEventListener('click', function (e) {
-    var t = e.target.closest ? e.target.closest('button') : null;
-    if (!t) return;
-    if (t.id === 'aiToggle') { S.aiOpen = true; render(false); var bx = app.querySelector('.ai-box'); if (bx) bx.scrollIntoView({ block: 'start' }); return; }
-    if (t.id === 'aiCopy') {
-      copyText(promptText(), function () { S.aiCopied = true; S.aiShowPrompt = false; var y0 = window.pageYOffset; render(false); window.scrollTo(0, y0); },
-        function () { S.aiShowPrompt = true; S.aiNote = 'Copy the prompt from the box above.'; S.aiBad = false; var y1 = window.pageYOffset; render(false); window.scrollTo(0, y1); var pb = document.getElementById('aiPromptBox'); if (pb) { pb.focus(); pb.select(); } });
-      return;
-    }
-    if (t.id === 'aiFill') {
-      var pj = pickJson(S.aiText);
-      if (!pj) { S.aiBad = true; S.aiNote = 'I couldn\'t read that. Paste the whole answer, including the part in curly brackets.'; }
-      else {
-        var got = aiFill(pj); saveDraft();
-        S.aiBad = !got;
-        S.aiNote = got ? 'Done. I filled in ' + got + ' answers. Add your birth details below, then tap Next to check each step and make sure it sounds like you.' : 'That answer was empty. Tell the AI more about your business and try again.';
-      }
-      var y2 = window.pageYOffset; render(false); window.scrollTo(0, y2);
-      return;
-    }
-    var pk = t.getAttribute('data-pick');
-    if (pk) {
-      var f = F[pk], v = t.getAttribute('data-v');
-      if (f.type !== 'multi') S.a[pk] = v;
-      else {
-        var list = Array.isArray(S.a[pk]) ? S.a[pk].slice() : [];
-        var at = list.indexOf(v);
-        if (at !== -1) list.splice(at, 1);
-        else if (f.maxPick && list.length >= f.maxPick) { S.errors[pk] = 'You can pick up to ' + f.maxPick + '. Tap one to unpick it first.'; render(false); return; }
-        else list.push(v);
-        S.a[pk] = list;
-      }
-      delete S.errors[pk];
-      saveDraft();
-      var y = window.pageYOffset; render(false); window.scrollTo(0, y);
-      return;
-    }
-    if (t.id === 'backBtn') { S.aiOpen = false; S.aiNote = ''; S.aiText = ''; S.aiCopied = false; S.errors = {}; S.formError = ''; S.step--; saveDraft(); render(true); return; }
-    if (t.getAttribute('data-add')) { S.offers++; S.confirmRemove = ''; saveDraft(); render(false); return; }
-    var rem = t.getAttribute('data-remove');
-    if (rem) {
-      if (S.confirmRemove !== rem) { S.confirmRemove = rem; render(false); return; }
-      S.confirmRemove = ''; S.errors = {}; removeOffer(+rem.slice(1)); saveDraft(); render(false); return;
-    }
-    var go = t.getAttribute('data-goto');
-    if (go !== null) { S.errors = {}; S.formError = ''; S.step = +go; saveDraft(); render(true); return; }
-    var rp = t.getAttribute('data-replace');
-    if (rp) { var inp = app.querySelector('[data-image="' + rp + '"]'); if (inp) inp.click(); return; }
-    var cl = t.getAttribute('data-clear');
-    if (cl) { if (S.existing[cl]) { S.images[cl] = null; S.existing[cl] = ''; } else delete S.images[cl]; render(false); }
-  });
-  app.addEventListener('submit', function (e) {
-    e.preventDefault();
-    if (S.sending || S.busy) return;
-    var errs = validate();
-    if (Object.keys(errs).length) { showErrors(errs); return; }
-    S.errors = {}; S.formError = '';
-    if (S.step === STEPS.length - 1) { submit(); return; }
-    S.aiOpen = false; S.aiNote = ''; S.aiText = ''; S.aiCopied = false; S.confirmRemove = '';
-    S.step++; saveDraft(); render(true);
+  form.addEventListener("change", function(e){
+    var f = e.target.closest ? e.target.closest(".field") : null;
+    if (f && f.classList.contains("invalid") && fieldValid(f)) f.classList.remove("invalid");
+    syncChecked();
+    saveDraft();
   });
 
-  /* ---------- start ---------- */
-  document.getElementById('previewNote').hidden = LIVE;
-  var token = '';
-  try { token = new URLSearchParams(location.search).get('edit') || ''; } catch (e) { token = ''; }
-  if (token && LIVE) {
-    app.innerHTML = '<div class="center-msg">Getting your answers...</div>';
-    fetch(SCRIPT_URL + '?action=load&token=' + encodeURIComponent(token))
-      .then(function (r) { return r.json(); })
-      .then(function (res) { if (!res || !res.ok) throw new Error('nf'); S.token = token; unpack(res.answers || {}, res.images || {}); render(true); })
-      .catch(function () { app.innerHTML = '<div class="center-msg">I couldn\'t find your answers with that link. Please email team@aurailia.com and I\'ll help you.</div>'; });
-  } else {
-    loadDraft();
-    render(false);
+  // Fallback highlight for browsers without :has()
+  function syncChecked(){
+    var labels = form.querySelectorAll(".choice");
+    for (var k = 0; k < labels.length; k++){
+      var inp = labels[k].querySelector("input");
+      labels[k].classList.toggle("checked", !!(inp && inp.checked));
+    }
   }
-  window.__auditForm = { unpack: unpack, payload: payload, aiFill: aiFill, S: S };
+
+  function collect(){
+    var data = {};
+    var els = form.elements;
+    for (var k = 0; k < els.length; k++){
+      var el = els[k];
+      if (!el.name || el.name === "_gotcha") continue;
+      if (el.type === "checkbox" || el.type === "radio"){
+        if (!el.checked) continue;
+        data[el.name] = data[el.name] ? data[el.name] + ", " + el.value : el.value;
+      } else {
+        data[el.name] = el.value;
+      }
+    }
+    return data;
+  }
+
+  function saveDraft(){
+    try {
+      localStorage.setItem(STORE_KEY, JSON.stringify(collect()));
+      savedNote.textContent = "Your answers are saved on this device as you go.";
+    } catch (err) {}
+  }
+
+  function loadDraft(){
+    var raw = null;
+    try { raw = localStorage.getItem(STORE_KEY); } catch (err) { return; }
+    if (!raw) return;
+    var data;
+    try { data = JSON.parse(raw); } catch (err) { return; }
+    var els = form.elements;
+    for (var k = 0; k < els.length; k++){
+      var el = els[k];
+      if (!el.name || !(el.name in data)) continue;
+      if (el.type === "checkbox" || el.type === "radio"){
+        var vals = String(data[el.name]).split(", ");
+        el.checked = vals.indexOf(el.value) !== -1;
+      } else {
+        el.value = data[el.name];
+      }
+    }
+    syncChecked();
+  }
+
+  function clearDraft(){
+    try { localStorage.removeItem(STORE_KEY); } catch (err) {}
+  }
+
+  backBtn.addEventListener("click", function(){
+    if (current > 0){ showStep(current - 1); window.scrollTo(0, 0); }
+  });
+
+  nextBtn.addEventListener("click", function(){
+    if (!validateStep(current)) return;
+    if (current < steps.length - 1){
+      showStep(current + 1);
+      window.scrollTo(0, 0);
+    } else {
+      submitForm();
+    }
+  });
+
+  function submitForm(){
+    if (SCRIPT_URL.indexOf("script.google.com") === -1){
+      formMsg.textContent = "This form isn't connected yet. Aurailia, paste your web app URL at the top of the script.";
+      formMsg.classList.add("show");
+      return;
+    }
+    var data = collect();
+    var gotcha = form.querySelector('input[name="_gotcha"]');
+    data["_gotcha"] = gotcha ? gotcha.value : "";
+
+    nextBtn.disabled = true;
+    backBtn.disabled = true;
+    nextBtn.textContent = "Sending...";
+    formMsg.classList.remove("show");
+
+    fetch(SCRIPT_URL, { method:"POST", body:JSON.stringify(data) })
+      .then(function(res){ return res.json(); })
+      .then(function(out){
+        if (!out || !out.ok) throw new Error("Bad response");
+        clearDraft();
+        form.hidden = true;
+        document.getElementById("progress").hidden = true;
+        savedNote.textContent = "";
+        document.getElementById("doneScreen").hidden = false;
+        window.scrollTo(0, 0);
+      })
+      .catch(function(){
+        nextBtn.disabled = false;
+        backBtn.disabled = false;
+        nextBtn.textContent = "Send it to Aurailia";
+        formMsg.textContent = "That didn't go through. Your answers are still here, so try again in a minute. If it keeps happening, email team@aurailia.com.";
+        formMsg.classList.add("show");
+      });
+  }
+
+  /* Talk instead of type */
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (SR){
+    var tips = form.querySelectorAll(".talk-tip");
+    for (var t = 0; t < tips.length; t++) tips[t].classList.add("show");
+    var micSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-2.08A7 7 0 0 0 19 12h-2z"/></svg>';
+    var active = null;
+
+    function stopActive(){
+      if (active){ try { active.rec.stop(); } catch (err) {} }
+    }
+
+    var areas = form.querySelectorAll("textarea");
+    Array.prototype.forEach.call(areas, function(area){
+      var row = document.createElement("div");
+      row.className = "mic-row";
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "mic";
+      btn.innerHTML = micSvg + '<span class="mic-label">Talk it through</span><span class="dot"></span>';
+      var note = document.createElement("span");
+      note.className = "mic-note";
+      row.appendChild(btn);
+      row.appendChild(note);
+      area.parentNode.insertBefore(row, area.nextSibling);
+
+      btn.addEventListener("click", function(){
+        if (active && active.btn === btn){ stopActive(); return; }
+        stopActive();
+        var rec = new SR();
+        rec.lang = "en-US";
+        rec.continuous = true;
+        rec.interimResults = false;
+        rec.onresult = function(e){
+          for (var r = e.resultIndex; r < e.results.length; r++){
+            if (!e.results[r].isFinal) continue;
+            var said = e.results[r][0].transcript.trim();
+            if (!said) continue;
+            said = said.charAt(0).toUpperCase() + said.slice(1);
+            var cur = area.value.replace(/\s+$/, "");
+            area.value = cur ? cur + (/[.!?]$/.test(cur) ? " " : ". ") + said : said;
+          }
+          area.dispatchEvent(new Event("input", { bubbles:true }));
+        };
+        rec.onerror = function(e){
+          if (e.error === "not-allowed" || e.error === "service-not-allowed"){
+            note.textContent = "Allow your microphone to use this, or just type.";
+          } else if (e.error === "no-speech"){
+            note.textContent = "I didn't catch anything. Tap and try again.";
+          }
+        };
+        rec.onend = function(){
+          btn.classList.remove("on");
+          btn.querySelector(".mic-label").textContent = "Talk it through";
+          if (active && active.btn === btn) active = null;
+        };
+        try {
+          rec.start();
+          active = { rec:rec, btn:btn };
+          btn.classList.add("on");
+          btn.querySelector(".mic-label").textContent = "Listening... tap to stop";
+          note.textContent = "";
+        } catch (err) {
+          note.textContent = "The mic isn't working here, so just type.";
+        }
+      });
+    });
+
+    nextBtn.addEventListener("click", stopActive);
+    backBtn.addEventListener("click", stopActive);
+  }
+
+  loadDraft();
+  showStep(0);
 })();
 </script>
 </body>
