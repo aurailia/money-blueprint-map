@@ -314,12 +314,6 @@
           <div class="err">Please pick one.</div>
         </div>
 
-        <div class="field" data-required id="goalOtherField" hidden>
-          <label class="q" for="goalOther">Tell me what kind of goal it is <span class="req">*</span></label>
-          <input type="text" id="goalOther" name="Goal type other" placeholder="Write a book, start a podcast, host my first retreat">
-          <div class="err">Please tell me what kind of goal it is.</div>
-        </div>
-
         <div class="field" data-required>
           <label class="q" for="goal">What's the one thing you want to make happen in the next 30 days? <span class="req">*</span></label>
           <textarea id="goal" name="The one goal"></textarea>
@@ -425,7 +419,6 @@
   }
 
   function fieldValid(field){
-    if (field.hidden) return true;
     var group = field.getAttribute("data-group");
     if (group){
       var boxes = field.querySelectorAll('input[name="' + group + '"]');
@@ -474,19 +467,8 @@
     saveDraft();
   });
 
-  // Show the extra box when she picks "Something else"
-  var goalOtherField = document.getElementById("goalOtherField");
-  var goalOther = document.getElementById("goalOther");
-  function syncGoalOther(){
-    var pick = form.querySelector('input[name="Goal type"]:checked');
-    var show = !!(pick && pick.value === "Something else");
-    goalOtherField.hidden = !show;
-    if (!show){ goalOther.value = ""; goalOtherField.classList.remove("invalid"); }
-  }
-
   // Fallback highlight for browsers without :has()
   function syncChecked(){
-    syncGoalOther();
     var labels = form.querySelectorAll(".choice");
     for (var k = 0; k < labels.length; k++){
       var inp = labels[k].querySelector("input");
