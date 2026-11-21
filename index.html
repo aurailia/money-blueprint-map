@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Your Money Blueprint Audit Map | She Promotes™</title>
+<title>Your Money Blueprint Audit Map | Aurailia</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -147,7 +147,7 @@
 <div class="wrap">
 
   <header>
-    <div class="brand">She Promotes™ VIP</div>
+    <div class="brand" id="brandLine">Your Yearly Member Gift</div>
     <h1>Your Money Blueprint Audit Map</h1>
     <p class="intro">This is where your Money Blueprint Audit Map and 30 day action plan begin. It takes about 10 minutes. Be honest with me, okay? The more real you are here, the more I can see.</p>
   </header>
@@ -180,7 +180,7 @@
 
         <div class="field" data-required>
           <label class="q" for="skool">Your Skool profile link <span class="req">*</span></label>
-          <p class="help">So I can check you're on the yearly VIP plan.</p>
+          <p class="help">So I can confirm your yearly membership.</p>
           <input type="url" id="skool" name="Skool profile" placeholder="https://www.skool.com/@your-name" inputmode="url">
           <div class="err">Please add your Skool profile link.</div>
         </div>
@@ -314,6 +314,12 @@
           <div class="err">Please pick one.</div>
         </div>
 
+        <div class="field" data-required id="goalOtherField" hidden>
+          <label class="q" for="goalOther">Tell me what kind of goal it is <span class="req">*</span></label>
+          <input type="text" id="goalOther" name="Goal type other" placeholder="Write a book, start a podcast, host my first retreat">
+          <div class="err">Please tell me what kind of goal it is.</div>
+        </div>
+
         <div class="field" data-required>
           <label class="q" for="goal">What's the one thing you want to make happen in the next 30 days? <span class="req">*</span></label>
           <textarea id="goal" name="The one goal"></textarea>
@@ -366,8 +372,12 @@
         </div>
 
         <div class="field" data-required data-group="VIP confirm">
-          <label class="choice"><input type="checkbox" name="VIP confirm" value="Yes, on the yearly VIP plan"> I'm on the yearly VIP plan in She Promotes™ <span class="req">*</span></label>
-          <div class="err">Please confirm you're on the yearly VIP plan.</div>
+          <span class="q">Where are you a yearly member? <span class="req">*</span></span>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="VIP confirm" value="Yearly VIP in She Promotes"> I'm a yearly VIP in She Promotes™</label>
+            <label class="choice"><input type="radio" name="VIP confirm" value="Yearly member of Embody Wealth"> I'm a yearly member of Embody Wealth</label>
+          </div>
+          <div class="err">Please pick where you're a yearly member.</div>
         </div>
       </section>
 
@@ -419,6 +429,7 @@
   }
 
   function fieldValid(field){
+    if (field.hidden) return true;
     var group = field.getAttribute("data-group");
     if (group){
       var boxes = field.querySelectorAll('input[name="' + group + '"]');
@@ -467,8 +478,19 @@
     saveDraft();
   });
 
+  // Show the extra box when she picks "Something else"
+  var goalOtherField = document.getElementById("goalOtherField");
+  var goalOther = document.getElementById("goalOther");
+  function syncGoalOther(){
+    var pick = form.querySelector('input[name="Goal type"]:checked');
+    var show = !!(pick && pick.value === "Something else");
+    goalOtherField.hidden = !show;
+    if (!show){ goalOther.value = ""; goalOtherField.classList.remove("invalid"); }
+  }
+
   // Fallback highlight for browsers without :has()
   function syncChecked(){
+    syncGoalOther();
     var labels = form.querySelectorAll(".choice");
     for (var k = 0; k < labels.length; k++){
       var inp = labels[k].querySelector("input");
@@ -537,6 +559,62 @@
     }
   });
 
+  /* Confetti after she sends it */
+  function confetti(){
+    try {
+      if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    } catch (err) {}
+    var c = document.createElement("canvas");
+    c.setAttribute("aria-hidden", "true");
+    c.style.cssText = "position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:9999";
+    document.body.appendChild(c);
+    var ctx = c.getContext("2d");
+    var dpr = window.devicePixelRatio || 1;
+    var W = window.innerWidth, H = window.innerHeight;
+    c.width = W * dpr; c.height = H * dpr; ctx.scale(dpr, dpr);
+    var colors = ["#d8b46a", "#e9d3a0", "#f2c4ce", "#f8dfe5", "#c9a7e8", "#ffffff"];
+    var bits = [];
+    for (var i = 0; i < 160; i++){
+      bits.push({
+        x: W / 2 + (Math.random() - 0.5) * W * 0.3,
+        y: H * 0.35,
+        vx: (Math.random() - 0.5) * 14,
+        vy: -Math.random() * 14 - 4,
+        w: 6 + Math.random() * 6,
+        h: 8 + Math.random() * 8,
+        r: Math.random() * Math.PI,
+        vr: (Math.random() - 0.5) * 0.3,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        star: Math.random() < 0.18
+      });
+    }
+    var start = null;
+    function frame(t){
+      if (!start) start = t;
+      var age = t - start;
+      ctx.clearRect(0, 0, W, H);
+      ctx.globalAlpha = age > 3000 ? Math.max(0, 1 - (age - 3000) / 1000) : 1;
+      for (var k = 0; k < bits.length; k++){
+        var b = bits[k];
+        b.vy += 0.32; b.vx *= 0.99; b.x += b.vx; b.y += b.vy; b.r += b.vr;
+        ctx.save();
+        ctx.translate(b.x, b.y);
+        ctx.rotate(b.r);
+        ctx.fillStyle = b.color;
+        if (b.star){
+          ctx.font = (b.h + 6) + "px serif";
+          ctx.fillText("\u2726", -b.w / 2, b.h / 2);
+        } else {
+          ctx.fillRect(-b.w / 2, -b.h / 2, b.w, b.h * Math.abs(Math.cos(b.r)));
+        }
+        ctx.restore();
+      }
+      if (age < 4000) { requestAnimationFrame(frame); }
+      else if (c.parentNode) { c.parentNode.removeChild(c); }
+    }
+    requestAnimationFrame(frame);
+  }
+
   function submitForm(){
     if (SCRIPT_URL.indexOf("script.google.com") === -1){
       formMsg.textContent = "This form isn't connected yet. Aurailia, paste your web app URL at the top of the script.";
@@ -562,6 +640,7 @@
         savedNote.textContent = "";
         document.getElementById("doneScreen").hidden = false;
         window.scrollTo(0, 0);
+        confetti();
       })
       .catch(function(){
         nextBtn.disabled = false;
@@ -645,6 +724,21 @@
   }
 
   loadDraft();
+
+  /* Link presets: ?from=embody or ?from=shepromotes */
+  (function(){
+    var m = /[?&]from=([^&#]+)/.exec(location.search || "");
+    var from = m ? decodeURIComponent(m[1]).toLowerCase() : "";
+    var brand = document.getElementById("brandLine");
+    var pick = null;
+    if (from.indexOf("embody") === 0){ brand.textContent = "Embody Wealth · Yearly Member Gift"; pick = "Yearly member of Embody Wealth"; }
+    else if (from.indexOf("she") === 0){ brand.textContent = "She Promotes™ VIP"; pick = "Yearly VIP in She Promotes"; }
+    if (pick){
+      var r = form.querySelector('input[name="VIP confirm"][value="' + pick + '"]');
+      if (r && !form.querySelector('input[name="VIP confirm"]:checked')) r.checked = true;
+      syncChecked();
+    }
+  })();
   showStep(0);
 })();
 </script>
